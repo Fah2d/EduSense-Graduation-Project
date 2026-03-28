@@ -1,0 +1,23 @@
+{
+  "thresholds": {
+    "engagement": 3,
+    "boredom": 2,
+    "confusion": 1,
+    "frustration": 1
+  },
+  "inference_thresholds": {
+    "engagement": 0.5250000000000002,
+    "boredom": 0.5750000000000003,
+    "confusion": 0.5250000000000002,
+    "frustration": 0.6000000000000003
+  },
+  "emotion_names": [
+    "engagement",
+    "boredom",
+    "confusion",
+    "frustration"
+  ],
+  "final_acc": 71.60841232227489,
+  "eng_f1": 63.337601365770375,
+  "fru_f1": 40.84880636604775
+}
