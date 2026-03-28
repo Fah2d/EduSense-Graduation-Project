@@ -21,12 +21,16 @@ import numpy as np
 from pathlib import Path
 from collections import deque
 from deepface import DeepFace
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+ 
 # ─────────────────────────────────────────────
 # CONFIG — edit these before running
 # ─────────────────────────────────────────────
 CONFIG = {
-    'anthropic_api_key': 'YOUR_KEY_HERE',       # console.anthropic.com
+    'anthropic_api_key': os.getenv('ANTHROPIC_API_KEY', ''),       # console.anthropic.com
     'kb_dir':            'Rag_system/edusense_kb',
     'output_dir':        'generated_notebooks',
     'trigger_threshold': 3,                      # consecutive alerts before trigger

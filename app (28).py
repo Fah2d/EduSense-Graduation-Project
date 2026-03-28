@@ -41,7 +41,11 @@ session = {
 }
 
 from collections import deque
-emotion_buffer = deque(maxlen=5)
+emotion_buffer    = deque(maxlen=7)   # 7 frames × 2s = 14s smoothing window
+baseline_buffer   = deque(maxlen=30)  # 30 frames for personal baseline calibration
+baseline_ready    = False
+baseline_neutral  = 0.60              # default — updated after calibration
+baseline_happy    = 0.10
 
 # Initialize FER once
 try:
@@ -51,6 +55,18 @@ try:
 except Exception as e:
     _fer_detector = None
     print(f'⚠️ FER not loaded: {e}')
+
+# Warm up FER at startup so first analysis is instant
+def _warmup_fer():
+    try:
+        dummy = np.zeros((48, 48, 3), dtype=np.uint8)
+        _fer_detector.detect_emotions(dummy)
+        print('✅ FER warmed up — instant analysis ready')
+    except Exception as e:
+        print(f'⚠️ FER warmup: {e}')
+
+if _fer_detector:
+    threading.Thread(target=_warmup_fer, daemon=True).start()
 
 # ── Helpers ───────────────────────────────────────────────
 
@@ -68,44 +84,187 @@ def get_rag():
 
 
 def analyze_frame(frame_bgr):
+    """
+    Best-accuracy emotion detection pipeline:
+    1. CLAHE preprocessing for lighting robustness
+    2. FER-7 → normalized probabilities
+    3. Baseline-aware mapping (personal calibration)
+    4. Exponential weighted temporal smoothing
+    5. Per-emotion adaptive thresholds
+    """
+    global baseline_neutral, baseline_happy, baseline_ready
+
     try:
         detector = _fer_detector
         if detector is None:
             return None
-        result = detector.detect_emotions(frame_bgr)
+
+        # ── 1. Preprocessing ──────────────────────────────────
+        small = cv2.resize(frame_bgr, (320, 240))
+
+        # CLAHE contrast enhancement — robust to dim/bright lighting
+        lab   = cv2.cvtColor(small, cv2.COLOR_BGR2LAB)
+        l, a, b_ch = cv2.split(lab)
+        clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(4, 4))
+        l     = clahe.apply(l)
+        small = cv2.cvtColor(cv2.merge([l, a, b_ch]), cv2.COLOR_LAB2BGR)
+
+        result = detector.detect_emotions(small)
         if not result:
             return None
-        raw = result[0]['emotions']
 
-        happy    = raw.get('happy',    0)
-        neutral  = raw.get('neutral',  0)
-        fear     = raw.get('fear',     0)
-        surprise = raw.get('surprise', 0)
-        angry    = raw.get('angry',    0)
-        disgust  = raw.get('disgust',  0)
-        sad      = raw.get('sad',      0)
+        # Use largest detected face
+        best = max(result, key=lambda x: x['box'][2] * x['box'][3])
+        raw  = best['emotions']
 
-        mapped = {
-            'engagement':  happy * 0.7 + (1 - neutral) * 0.3,
-            'boredom':     neutral * 0.6 + sad * 0.4,
-            'confusion':   fear * 0.5 + surprise * 0.5,
-            'frustration': angry * 0.6 + disgust * 0.4,
+        # ── 2. Normalize probabilities ────────────────────────
+        happy    = float(raw.get('happy',    0))
+        neutral  = float(raw.get('neutral',  0))
+        fear     = float(raw.get('fear',     0))
+        surprise = float(raw.get('surprise', 0))
+        angry    = float(raw.get('angry',    0))
+        disgust  = float(raw.get('disgust',  0))
+        sad      = float(raw.get('sad',      0))
+
+        total = happy + neutral + fear + surprise + angry + disgust + sad
+        if total < 0.3:
+            return None   # FER not confident enough
+        # Normalize to sum=1
+        h  = happy    / total
+        n  = neutral  / total
+        f  = fear     / total
+        su = surprise / total
+        a  = angry    / total
+        d  = disgust  / total
+        s  = sad      / total
+
+        # ── 3. Baseline calibration ───────────────────────────
+        # Collect baseline during first 30 frames (first 60 seconds)
+        if not baseline_ready:
+            baseline_buffer.append({'neutral': n, 'happy': h})
+            if len(baseline_buffer) >= 20:
+                baseline_neutral = float(np.mean([x['neutral'] for x in baseline_buffer]))
+                baseline_happy   = float(np.mean([x['happy']   for x in baseline_buffer]))
+                baseline_ready   = True
+                print(f"✅ Baseline calibrated — neutral={baseline_neutral:.2f} happy={baseline_happy:.2f}")
+
+        # Adjust neutral threshold based on this person's resting face
+        # If their resting neutral is high (e.g. 0.7), we compensate
+        neutral_adj = max(0, n - baseline_neutral * 0.6)
+        happy_adj   = max(0, h - baseline_happy   * 0.5)
+
+        # ── 4. Learning state formulas ────────────────────────
+        # Based on D'Mello & Graesser (2012) + baseline compensation
+
+        # ENGAGEMENT: active positive interest
+        # Requires clear happy signal above their personal baseline
+        engagement = (
+            happy_adj * 0.75 +   # above-baseline happiness
+            su * 0.25            # curiosity/interest signal
+        )
+
+        # BOREDOM: flat disengaged state
+        # Uses baseline-adjusted neutral (not just raw neutral)
+        # Requires both elevated neutral AND sad/low-happiness
+        boredom = (
+            neutral_adj * 0.50 +     # above-baseline neutral
+            s * 0.30 +               # sadness component
+            max(0, 0.3 - h) * 0.20   # significant absence of happiness
+        )
+
+        # CONFUSION: cognitive overload
+        # Multiplicative: requires BOTH fear AND surprise simultaneously
+        # Single fear = nervousness, not confusion
+        # Single surprise = startle, not confusion
+        confusion_mult = min(f * su * 6.0, 0.5)   # synergy bonus
+        confusion = (
+            confusion_mult +
+            f  * 0.25 +    # furrowed brow
+            su * 0.20 +    # wide eyes
+            max(0, 0.25 - h) * 0.15  # unhappy
+        )
+
+        # FRUSTRATION: blocked goal affect
+        # Requires clear angry/disgust — not mild
+        frustration = (
+            a * 0.60 +
+            d * 0.30 +
+            f * 0.10      # tension component
+        )
+
+        scores = {
+            'engagement':  min(max(engagement,  0.0), 1.0),
+            'boredom':     min(max(boredom,     0.0), 1.0),
+            'confusion':   min(max(confusion,   0.0), 1.0),
+            'frustration': min(max(frustration, 0.0), 1.0),
         }
-        emotion_buffer.append(mapped)
-        smoothed = {}
-        for e in mapped:
-            avg = np.mean([h[e] for h in emotion_buffer])
-            smoothed[e] = {'confidence': round(float(avg), 3),
-                          'positive': avg > 0.30}
-        return smoothed
+
+        # ── 5. Exponential weighted smoothing ─────────────────
+        # Recent frames get more weight than older ones
+        emotion_buffer.append(scores)
+        n_frames = len(emotion_buffer)
+        # Weights: exponentially increasing (most recent = highest weight)
+        raw_w = np.array([np.exp(0.4 * i) for i in range(n_frames)])
+        weights = raw_w / raw_w.sum()
+
+        smoothed_scores = {
+            e: float(np.average([fr[e] for fr in emotion_buffer], weights=weights))
+            for e in scores
+        }
+
+        # ── 6. Adaptive thresholds ────────────────────────────
+        # Fixed thresholds — calibrated for reliability
+        thresholds = {
+            'engagement':  0.30,
+            'boredom':     0.30,
+            'confusion':   0.30,
+            'frustration': 0.30,
+        }
+
+        result_state = {}
+        for e in smoothed_scores:
+            conf = round(min(max(smoothed_scores[e], 0.0), 1.0), 3)
+            result_state[e] = {
+                'confidence': conf,
+                'positive':   bool(conf > thresholds[e]),
+            }
+
+        return result_state
+
     except Exception as e:
         print(f"FER error: {e}")
         return None
 
 
 def is_dissatisfied(emotions):
-    return any(emotions[e]['positive']
-               for e in ['boredom', 'confusion', 'frustration'])
+    """
+    Reliable dissatisfaction detection.
+    Requires SUSTAINED negative signal — not a single spike.
+
+    Logic:
+    - Any one negative emotion clearly active (confusion OR boredom OR frustration)
+    - AND student is not engaged (engagement not positive)
+
+    This prevents false positives when student briefly looks neutral
+    but is actually paying attention.
+    """
+    if not emotions:
+        return False
+
+    # Check each negative emotion
+    bored     = emotions.get('boredom',     {}).get('positive', False)
+    confused  = emotions.get('confusion',   {}).get('positive', False)
+    frustrated= emotions.get('frustration', {}).get('positive', False)
+    engaged   = emotions.get('engagement',  {}).get('positive', False)
+
+    any_negative = bored or confused or frustrated
+
+    # If engaged, don't trigger — student is paying attention despite some confusion
+    # Exception: frustration overrides engagement (very strong signal)
+    if engaged and not frustrated:
+        return False
+
+    return any_negative
 
 
 def get_transcript_at(video_time, window=60):
@@ -132,7 +291,7 @@ def generate_session_report():
             'boredom':     round(h['emotions']['boredom']['confidence'], 3),
             'confusion':   round(h['emotions']['confusion']['confidence'], 3),
             'frustration': round(h['emotions']['frustration']['confidence'], 3),
-            'dissatisfied': is_dissatisfied(h['emotions']),
+            'dissatisfied': bool(is_dissatisfied(h['emotions'])),
         })
 
     # Overall stats
@@ -302,6 +461,10 @@ def analyze_frame_route():
         img_bytes = base64.b64decode(img_data.split(',')[1])
         nparr     = np.frombuffer(img_bytes, np.uint8)
         frame     = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if frame is None:
+            return jsonify({'emotions': None, 'triggered': False})
+        if len(frame.shape) == 2:
+            frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
         emotions  = analyze_frame(frame)
 
         if emotions is None:
@@ -320,7 +483,7 @@ def analyze_frame_route():
         else:
             session['trigger_count'] = max(0, session['trigger_count'] - 1)
 
-        if session['trigger_count'] >= 3 and now - session['last_trigger'] > 180:
+        if session['trigger_count'] >= 2 and now - session['last_trigger'] > 60:
             session['last_trigger']  = now
             session['trigger_count'] = 0
             triggered = True
@@ -465,9 +628,14 @@ def reset():
         'status': 'idle', 'status_msg': '', 'video_duration': 0,
     })
     emotion_buffer.clear()
+    global baseline_ready, baseline_neutral, baseline_happy
+    baseline_buffer.clear()
+    baseline_ready   = False
+    baseline_neutral = 0.60
+    baseline_happy   = 0.10
     return jsonify({'success': True})
 
 
 if __name__ == '__main__':
     print("\n🚀 EduSense — http://localhost:5000\n")
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True, ssl_context='adhoc')

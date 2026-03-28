@@ -1,0 +1,243 @@
+{
+  "session_duration": 174,
+  "total_checks": 18,
+  "focus_rate": 22.2,
+  "avg_engagement": 0.209,
+  "avg_boredom": 0.431,
+  "avg_confusion": 0.329,
+  "avg_frustration": 0.101,
+  "struggle_count": 3,
+  "notebooks_generated": 3,
+  "timeline": [
+    {
+      "video_time": 6.0,
+      "engagement": 0.144,
+      "boredom": 0.496,
+      "confusion": 0.345,
+      "frustration": 0.069,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 9.0,
+      "engagement": 0.129,
+      "boredom": 0.509,
+      "confusion": 0.348,
+      "frustration": 0.07,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 12.0,
+      "engagement": 0.126,
+      "boredom": 0.512,
+      "confusion": 0.348,
+      "frustration": 0.07,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 15.0,
+      "engagement": 0.136,
+      "boredom": 0.494,
+      "confusion": 0.355,
+      "frustration": 0.079,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 18.0,
+      "engagement": 0.141,
+      "boredom": 0.483,
+      "confusion": 0.359,
+      "frustration": 0.085,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 21.0,
+      "engagement": 0.145,
+      "boredom": 0.471,
+      "confusion": 0.363,
+      "frustration": 0.096,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 24.0,
+      "engagement": 0.153,
+      "boredom": 0.45,
+      "confusion": 0.368,
+      "frustration": 0.113,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 27.0,
+      "engagement": 0.16,
+      "boredom": 0.434,
+      "confusion": 0.374,
+      "frustration": 0.123,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 33.0,
+      "engagement": 0.163,
+      "boredom": 0.427,
+      "confusion": 0.381,
+      "frustration": 0.125,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 39.0,
+      "engagement": 0.296,
+      "boredom": 0.356,
+      "confusion": 0.322,
+      "frustration": 0.106,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 45.0,
+      "engagement": 0.398,
+      "boredom": 0.295,
+      "confusion": 0.276,
+      "frustration": 0.106,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 60.0,
+      "engagement": 0.396,
+      "boredom": 0.299,
+      "confusion": 0.266,
+      "frustration": 0.111,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 63.0,
+      "engagement": 0.39,
+      "boredom": 0.312,
+      "confusion": 0.258,
+      "frustration": 0.106,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 66.0,
+      "engagement": 0.378,
+      "boredom": 0.332,
+      "confusion": 0.245,
+      "frustration": 0.102,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 69.0,
+      "engagement": 0.235,
+      "boredom": 0.414,
+      "confusion": 0.297,
+      "frustration": 0.12,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 72.0,
+      "engagement": 0.125,
+      "boredom": 0.489,
+      "confusion": 0.339,
+      "frustration": 0.114,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 75.0,
+      "engagement": 0.119,
+      "boredom": 0.501,
+      "confusion": 0.342,
+      "frustration": 0.097,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 78.0,
+      "engagement": 0.128,
+      "boredom": 0.48,
+      "confusion": 0.341,
+      "frustration": 0.121,
+      "dissatisfied": true
+    }
+  ],
+  "struggle_moments": [
+    {
+      "timestamp": 12.845551013946533,
+      "video_time": 12.011,
+      "video_time_fmt": "00:12",
+      "timestamp_fmt": "00:12",
+      "emotions": {
+        "engagement": 0.126,
+        "boredom": 0.512,
+        "confusion": 0.348,
+        "frustration": 0.07
+      },
+      "detected": [
+        "boredom",
+        "confusion"
+      ],
+      "transcript": "Student appeared disengaged during the lecture."
+    },
+    {
+      "timestamp": 45.62649416923523,
+      "video_time": 45.014,
+      "video_time_fmt": "00:45",
+      "timestamp_fmt": "00:45",
+      "emotions": {
+        "engagement": 0.398,
+        "boredom": 0.295,
+        "confusion": 0.276,
+        "frustration": 0.106
+      },
+      "detected": [
+        "engagement"
+      ],
+      "transcript": "Student appeared disengaged during the lecture."
+    },
+    {
+      "timestamp": 78.35728240013123,
+      "video_time": 78.008,
+      "video_time_fmt": "01:18",
+      "timestamp_fmt": "01:18",
+      "emotions": {
+        "engagement": 0.128,
+        "boredom": 0.48,
+        "confusion": 0.341,
+        "frustration": 0.121
+      },
+      "detected": [
+        "boredom",
+        "confusion"
+      ],
+      "transcript": "Student appeared disengaged during the lecture."
+    }
+  ],
+  "notebooks": [
+    {
+      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260328_154043_Binary_Search_Algorithm.ipynb",
+      "filename": "20260328_154043_Binary_Search_Algorithm.ipynb",
+      "timestamp": "00:12",
+      "detected": [
+        "boredom",
+        "confusion"
+      ],
+      "index": 1,
+      "video_time": 12.011
+    },
+    {
+      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260328_154100_Binary_Search_Algorithm.ipynb",
+      "filename": "20260328_154100_Binary_Search_Algorithm.ipynb",
+      "timestamp": "00:45",
+      "detected": [
+        "engagement"
+      ],
+      "index": 2,
+      "video_time": 45.014
+    },
+    {
+      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260328_154118_Binary_Search_Algorithm_Fundam.ipynb",
+      "filename": "20260328_154118_Binary_Search_Algorithm_Fundam.ipynb",
+      "timestamp": "01:18",
+      "detected": [
+        "boredom",
+        "confusion"
+      ],
+      "index": 3,
+      "video_time": 78.008
+    }
+  ]
+}

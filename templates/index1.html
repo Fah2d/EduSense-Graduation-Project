@@ -545,226 +545,9 @@ input:focus { border-color:var(--accent); }
 ::-webkit-scrollbar { width:3px; }
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
-
-/* ── Loading Overlay ─────────────────────────────────── */
-#loading-overlay {
-  position: fixed;
-  inset: 0;
-  background: #08080f;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-}
-
-.loading-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 2.8rem;
-  letter-spacing: -0.04em;
-  margin-bottom: 6px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.2s forwards;
-}
-.loading-logo span { color: #6ee7b7; }
-
-.loading-tagline {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.75rem;
-  color: #4a5568;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 56px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.4s forwards;
-}
-
-/* Animated dots ring */
-.loading-ring {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin-bottom: 36px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.5s forwards;
-}
-
-.loading-ring::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid #1e1e30;
-}
-
-.loading-ring::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: #6ee7b7;
-  border-right-color: rgba(110,231,183,0.3);
-  animation: spin 1s linear infinite;
-}
-
-.loading-ring-inner {
-  position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  border-top-color: rgba(110,231,183,0.4);
-  animation: spin 1.5s linear infinite reverse;
-}
-
-.loading-center-dot {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #6ee7b7;
-  box-shadow: 0 0 12px #6ee7b7;
-  animation: dotPulse 1.5s ease infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes dotPulse {
-  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-  50% { transform: translate(-50%,-50%) scale(1.4); opacity: 0.6; }
-}
-
-/* Steps indicator */
-.loading-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.7s forwards;
-}
-
-.loading-step {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  color: #2a2a3d;
-  transition: color 0.5s;
-}
-
-.loading-step.active { color: #e2e8f0; }
-.loading-step.done   { color: #6ee7b7; }
-
-.step-icon {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  border: 1px solid #2a2a3d;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.6rem;
-  flex-shrink: 0;
-  transition: all 0.5s;
-}
-
-.loading-step.active .step-icon {
-  border-color: #6ee7b7;
-  color: #6ee7b7;
-  box-shadow: 0 0 8px rgba(110,231,183,0.3);
-}
-
-.loading-step.done .step-icon {
-  border-color: #6ee7b7;
-  background: #6ee7b7;
-  color: #08080f;
-}
-
-.loading-status {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  color: #4a5568;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.9s forwards;
-  min-height: 20px;
-}
-
-.loading-status span {
-  animation: blink 1.2s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.overlay-fade-out {
-  animation: fadeOut 0.6s ease forwards !important;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; pointer-events: none; }
-}
-
-/* Grid background for overlay */
-#loading-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(110,231,183,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110,231,183,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
 </style>
 </head>
 <body>
-
-<!-- ── Loading Overlay ───────────────────────────────── -->
-<div id="loading-overlay">
-  <div class="loading-logo">Edu<span>Sense</span></div>
-  <div class="loading-tagline">Intelligent Classroom System</div>
-
-  <div class="loading-ring">
-    <div class="loading-ring-inner"></div>
-    <div class="loading-center-dot"></div>
-  </div>
-
-  <div class="loading-steps">
-    <div class="loading-step active" id="ls-1">
-      <div class="step-icon">1</div>
-      <span>Initializing emotion detection model</span>
-    </div>
-    <div class="loading-step" id="ls-2">
-      <div class="step-icon">2</div>
-      <span>Loading knowledge base</span>
-    </div>
-    <div class="loading-step" id="ls-3">
-      <div class="step-icon">3</div>
-      <span>Connecting to Claude API</span>
-    </div>
-    <div class="loading-step" id="ls-4">
-      <div class="step-icon">4</div>
-      <span>System ready</span>
-    </div>
-  </div>
-
-  <div class="loading-status" id="loading-status">
-    Starting up<span>...</span>
-  </div>
-</div>
-
 
 <header>
   <div class="logo">Edu<span>Sense</span></div>
@@ -1072,6 +855,7 @@ function getVideoDuration() {
 
 // ── Init ──────────────────────────────────────────────────
 window.onload = () => {
+  loadKBStats();
   setupUpload();
   initChart();
 };
@@ -1164,9 +948,7 @@ async function startSession() {
   embedYouTube(url);
 
   // Start loops
-  S.analyzeTimer  = setInterval(captureAndAnalyze, 2000);
-  // Show calibration notice
-  document.getElementById('s-msg').textContent = '⏳ Calibrating to your face (first 40s)...';
+  S.analyzeTimer  = setInterval(captureAndAnalyze, 3000);
   S.statusTimer   = setInterval(pollStatus, 2000);
   S.timerInterval = setInterval(updateTimers, 1000);
 
@@ -1483,81 +1265,6 @@ function resetSession() {
     S.engChart.update();
   }
 }
-
-
-// ── Loading Overlay ───────────────────────────────────
-async function initLoadingSequence() {
-  const overlay  = document.getElementById('loading-overlay');
-  const statusEl = document.getElementById('loading-status');
-
-  function setStep(n, done=false) {
-    for (let i = 1; i <= 4; i++) {
-      const el = document.getElementById(`ls-${i}`);
-      if (i < n)      { el.className = 'loading-step done';   el.querySelector('.step-icon').textContent = '✓'; }
-      else if (i === n) { el.className = done ? 'loading-step done' : 'loading-step active'; if(done) el.querySelector('.step-icon').textContent = '✓'; }
-      else            { el.className = 'loading-step'; }
-    }
-  }
-
-  function setStatus(msg) {
-    statusEl.innerHTML = msg + '<span>...</span>';
-  }
-
-  // Step 1: Check FER warmup
-  setStatus('Loading TensorFlow & FER model');
-  setStep(1);
-
-  // Poll backend until ready
-  let ferReady = false;
-  for (let i = 0; i < 30; i++) {
-    try {
-      const r = await fetch('/api/kb-stats');
-      if (r.ok) { ferReady = true; break; }
-    } catch(e) {}
-    await new Promise(r => setTimeout(r, 1000));
-  }
-
-  setStep(1, true);
-  await new Promise(r => setTimeout(r, 300));
-
-  // Step 2: Knowledge base
-  setStep(2);
-  setStatus('Loading knowledge base');
-  try {
-    const r = await fetch('/api/kb-stats');
-    const d = await r.json();
-    await new Promise(r => setTimeout(r, 600));
-    setStatus(`Knowledge base: ${d.chunks || 0} chunks indexed`);
-  } catch(e) {}
-  await new Promise(r => setTimeout(r, 400));
-  setStep(2, true);
-
-  // Step 3: Claude API
-  setStep(3);
-  setStatus('Connecting to Claude API');
-  await new Promise(r => setTimeout(r, 800));
-  setStep(3, true);
-
-  // Step 4: Ready
-  setStep(4);
-  setStatus('All systems ready');
-  await new Promise(r => setTimeout(r, 600));
-  setStep(4, true);
-
-  await new Promise(r => setTimeout(r, 400));
-
-  // Fade out
-  overlay.classList.add('overlay-fade-out');
-  await new Promise(r => setTimeout(r, 600));
-  overlay.style.display = 'none';
-
-  // Now load KB stats for the UI
-  loadKBStats();
-}
-
-// Start loading sequence immediately
-initLoadingSequence();
-
 </script>
 </body>
 </html>

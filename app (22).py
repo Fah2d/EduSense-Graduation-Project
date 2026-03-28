@@ -52,6 +52,18 @@ except Exception as e:
     _fer_detector = None
     print(f'⚠️ FER not loaded: {e}')
 
+# Warm up FER at startup so first analysis is instant
+def _warmup_fer():
+    try:
+        dummy = np.zeros((48, 48, 3), dtype=np.uint8)
+        _fer_detector.detect_emotions(dummy)
+        print('✅ FER warmed up — instant analysis ready')
+    except Exception as e:
+        print(f'⚠️ FER warmup: {e}')
+
+if _fer_detector:
+    threading.Thread(target=_warmup_fer, daemon=True).start()
+
 # ── Helpers ───────────────────────────────────────────────
 
 def get_rag():
@@ -72,40 +84,115 @@ def analyze_frame(frame_bgr):
         detector = _fer_detector
         if detector is None:
             return None
-        result = detector.detect_emotions(frame_bgr)
+
+        small  = cv2.resize(frame_bgr, (320, 240))
+        result = detector.detect_emotions(small)
         if not result:
             return None
+
         raw = result[0]['emotions']
 
-        happy    = raw.get('happy',    0)
-        neutral  = raw.get('neutral',  0)
-        fear     = raw.get('fear',     0)
-        surprise = raw.get('surprise', 0)
-        angry    = raw.get('angry',    0)
-        disgust  = raw.get('disgust',  0)
-        sad      = raw.get('sad',      0)
+        happy    = float(raw.get('happy',    0))
+        neutral  = float(raw.get('neutral',  0))
+        fear     = float(raw.get('fear',     0))
+        surprise = float(raw.get('surprise', 0))
+        angry    = float(raw.get('angry',    0))
+        disgust  = float(raw.get('disgust',  0))
+        sad      = float(raw.get('sad',      0))
 
-        mapped = {
-            'engagement':  happy * 0.7 + (1 - neutral) * 0.3,
-            'boredom':     neutral * 0.6 + sad * 0.4,
-            'confusion':   fear * 0.5 + surprise * 0.5,
-            'frustration': angry * 0.6 + disgust * 0.4,
+        # ── D'Mello & Graesser (2012) grounded mapping ───────
+        scores = {
+            'engagement':  0.70*happy + 0.20*surprise - 0.10*sad,
+            'boredom':     0.50*neutral + 0.30*sad + 0.20*(1 - happy),
+            'confusion':   0.40*fear + 0.35*surprise + 0.25*(1 - happy),
+            'frustration': 0.55*angry + 0.25*disgust + 0.20*fear,
         }
-        emotion_buffer.append(mapped)
-        smoothed = {}
-        for e in mapped:
-            avg = np.mean([h[e] for h in emotion_buffer])
-            smoothed[e] = {'confidence': round(float(avg), 3),
-                          'positive': avg > 0.30}
-        return smoothed
+
+        # Clip scores to [0, 1]
+        scores = {e: min(max(v, 0.0), 1.0) for e, v in scores.items()}
+
+        # Temporal smoothing over last 5 frames
+        emotion_buffer.append(scores)
+        smoothed = {
+            e: float(np.mean([h[e] for h in emotion_buffer]))
+            for e in scores
+        }
+
+        thresholds = {
+            'engagement':  0.45,
+            'boredom':     0.38,
+            'confusion':   0.25,
+            'frustration': 0.28,
+        }
+
+        result_state = {}
+        for e in smoothed:
+            conf = round(min(max(smoothed[e], 0.0), 1.0), 3)
+            result_state[e] = {
+                'confidence': conf,
+                'positive':   bool(conf > thresholds[e]),
+            }
+
+        # ── Satisfaction score (0-1) ──────────────────────────
+        # Weighted combination: confusion most important for notebooks
+        dissatisfaction_score = (
+            0.35 * smoothed['confusion'] / 0.25 +    # normalized by threshold
+            0.30 * smoothed['frustration'] / 0.28 +
+            0.20 * smoothed['boredom'] / 0.38 +
+            0.15 * (1 - smoothed['engagement'] / 0.45)
+        ) / 4.0
+
+        dissatisfaction_score = round(min(max(dissatisfaction_score, 0.0), 1.0), 3)
+
+        # Satisfied = dissatisfaction_score < 0.4 AND engagement positive
+        satisfied = (
+            dissatisfaction_score < 0.40 and
+            result_state['engagement']['positive']
+        )
+
+        result_state['_meta'] = {
+            'dissatisfaction_score': dissatisfaction_score,
+            'satisfied':             bool(satisfied),
+            'dominant_negative':     max(
+                ['boredom', 'confusion', 'frustration'],
+                key=lambda e: smoothed[e]
+            ),
+        }
+
+        return result_state
+
     except Exception as e:
         print(f"FER error: {e}")
         return None
 
 
 def is_dissatisfied(emotions):
-    return any(emotions[e]['positive']
-               for e in ['boredom', 'confusion', 'frustration'])
+    """
+    Multi-signal dissatisfaction detection.
+    Uses both individual thresholds AND the composite dissatisfaction score.
+    More robust than single-emotion triggers.
+    """
+    if not emotions:
+        return False
+
+    # Method 1: any negative state active
+    any_negative = any(
+        emotions[e]['positive']
+        for e in ['boredom', 'confusion', 'frustration']
+    )
+
+    # Method 2: composite score above threshold
+    meta  = emotions.get('_meta', {})
+    score = meta.get('dissatisfaction_score', 0)
+    high_score = score > 0.40
+
+    # Method 3: not engaged AND any negative signal
+    not_engaged = not emotions['engagement']['positive']
+
+    # Trigger if ANY two methods agree
+    signals = [any_negative, high_score, not_engaged]
+    return sum(signals) >= 2
+
 
 
 def get_transcript_at(video_time, window=60):
@@ -128,11 +215,13 @@ def generate_session_report():
     for h in history:
         timeline.append({
             'video_time':  round(h.get('video_time', 0), 1),
-            'engagement':  round(h['emotions']['engagement']['confidence'], 3),
-            'boredom':     round(h['emotions']['boredom']['confidence'], 3),
-            'confusion':   round(h['emotions']['confusion']['confidence'], 3),
-            'frustration': round(h['emotions']['frustration']['confidence'], 3),
-            'dissatisfied': is_dissatisfied(h['emotions']),
+            'engagement':  round(h['emotions'].get('engagement', {}).get('confidence', 0), 3),
+            'boredom':     round(h['emotions'].get('boredom', {}).get('confidence', 0), 3),
+            'confusion':   round(h['emotions'].get('confusion', {}).get('confidence', 0), 3),
+            'frustration': round(h['emotions'].get('frustration', {}).get('confidence', 0), 3),
+            'dissatisfaction_score': h['emotions'].get('_meta', {}).get('dissatisfaction_score', 0),
+            'dissatisfied':          bool(is_dissatisfied(h['emotions'])),
+            'dissatisfaction_score':  h['emotions'].get('_meta', {}).get('dissatisfaction_score', 0),
         })
 
     # Overall stats
@@ -179,7 +268,7 @@ def status():
     eng  = 100.0
     if session['emotion_history']:
         focused = sum(1 for h in session['emotion_history']
-                     if not is_dissatisfied(h['emotions']))
+                     if not is_dissatisfied({k:v for k,v in h['emotions'].items() if k != '_meta'}))
         eng = focused / len(session['emotion_history']) * 100
     return jsonify({
         'status':          session['status'],
@@ -302,6 +391,10 @@ def analyze_frame_route():
         img_bytes = base64.b64decode(img_data.split(',')[1])
         nparr     = np.frombuffer(img_bytes, np.uint8)
         frame     = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if frame is None:
+            return jsonify({'emotions': None, 'triggered': False})
+        if len(frame.shape) == 2:
+            frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
         emotions  = analyze_frame(frame)
 
         if emotions is None:
@@ -332,19 +425,21 @@ def analyze_frame_route():
                 'video_time':     video_time,
                 'video_time_fmt': f"{mins:02d}:{secs:02d}",
                 'timestamp_fmt':  f"{int(elapsed//60):02d}:{int(elapsed%60):02d}",
-                'emotions':       {e: emotions[e]['confidence'] for e in emotions},
-                'detected':       [e for e in emotions if emotions[e]['positive']],
+                'emotions':       {e: emotions[e]['confidence'] for e in emotions if e != '_meta'},
+                'detected':       [e for e in emotions if e != '_meta' and emotions[e].get('positive', False)],
                 'transcript':     get_transcript_at(video_time),
             })
             print(f"⚠️ Struggle at video {mins:02d}:{secs:02d}")
 
         return jsonify({
-            'emotions':       {e: {'confidence': emotions[e]['confidence'],
-                                   'positive':   emotions[e]['positive']}
-                               for e in emotions},
-            'triggered':      triggered,
-            'trigger_count':  session['trigger_count'],
-            'struggle_count': len(session['struggle_moments']),
+            'emotions':      {e: {'confidence': emotions[e]['confidence'],
+                                  'positive':   emotions[e]['positive']}
+                              for e in emotions if e != '_meta'},
+            'triggered':     triggered,
+            'trigger_count': session['trigger_count'],
+            'struggle_count':len(session['struggle_moments']),
+            'satisfaction':  emotions.get('_meta', {}).get('dissatisfaction_score', 0),
+            'satisfied':     bool(emotions.get('_meta', {}).get('satisfied', True)),
         })
 
     except Exception as e:
@@ -423,10 +518,10 @@ def engagement_timeline():
         'timeline': [
             {
                 'video_time':  round(h.get('video_time', 0), 1),
-                'engagement':  round(h['emotions']['engagement']['confidence'], 3),
-                'boredom':     round(h['emotions']['boredom']['confidence'], 3),
-                'confusion':   round(h['emotions']['confusion']['confidence'], 3),
-                'frustration': round(h['emotions']['frustration']['confidence'], 3),
+                'engagement':  round(h['emotions'].get('engagement', {}).get('confidence', 0), 3),
+                'boredom':     round(h['emotions'].get('boredom', {}).get('confidence', 0), 3),
+                'confusion':   round(h['emotions'].get('confusion', {}).get('confidence', 0), 3),
+                'frustration': round(h['emotions'].get('frustration', {}).get('confidence', 0), 3),
             }
             for h in history
         ],
@@ -470,4 +565,4 @@ def reset():
 
 if __name__ == '__main__':
     print("\n🚀 EduSense — http://localhost:5000\n")
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True, ssl_context='adhoc')

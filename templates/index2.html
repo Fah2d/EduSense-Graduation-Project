@@ -1164,9 +1164,7 @@ async function startSession() {
   embedYouTube(url);
 
   // Start loops
-  S.analyzeTimer  = setInterval(captureAndAnalyze, 2000);
-  // Show calibration notice
-  document.getElementById('s-msg').textContent = '⏳ Calibrating to your face (first 40s)...';
+  S.analyzeTimer  = setInterval(captureAndAnalyze, 3000);
   S.statusTimer   = setInterval(pollStatus, 2000);
   S.timerInterval = setInterval(updateTimers, 1000);
 

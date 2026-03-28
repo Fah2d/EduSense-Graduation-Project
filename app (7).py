@@ -52,6 +52,18 @@ except Exception as e:
     _fer_detector = None
     print(f'⚠️ FER not loaded: {e}')
 
+# Warm up FER at startup so first analysis is instant
+def _warmup_fer():
+    try:
+        dummy = np.zeros((48, 48, 3), dtype=np.uint8)
+        _fer_detector.detect_emotions(dummy)
+        print('✅ FER warmed up — instant analysis ready')
+    except Exception as e:
+        print(f'⚠️ FER warmup: {e}')
+
+if _fer_detector:
+    threading.Thread(target=_warmup_fer, daemon=True).start()
+
 # ── Helpers ───────────────────────────────────────────────
 
 def get_rag():
@@ -72,7 +84,9 @@ def analyze_frame(frame_bgr):
         detector = _fer_detector
         if detector is None:
             return None
-        result = detector.detect_emotions(frame_bgr)
+        # Resize to smaller size for faster analysis
+        small = cv2.resize(frame_bgr, (320, 240))
+        result = detector.detect_emotions(small)
         if not result:
             return None
         raw = result[0]['emotions']
@@ -96,7 +110,7 @@ def analyze_frame(frame_bgr):
         for e in mapped:
             avg = np.mean([h[e] for h in emotion_buffer])
             smoothed[e] = {'confidence': round(float(avg), 3),
-                          'positive': avg > 0.30}
+                          'positive': bool(avg > 0.30)}
         return smoothed
     except Exception as e:
         print(f"FER error: {e}")
@@ -132,7 +146,7 @@ def generate_session_report():
             'boredom':     round(h['emotions']['boredom']['confidence'], 3),
             'confusion':   round(h['emotions']['confusion']['confidence'], 3),
             'frustration': round(h['emotions']['frustration']['confidence'], 3),
-            'dissatisfied': is_dissatisfied(h['emotions']),
+            'dissatisfied': bool(is_dissatisfied(h['emotions'])),
         })
 
     # Overall stats
@@ -302,6 +316,10 @@ def analyze_frame_route():
         img_bytes = base64.b64decode(img_data.split(',')[1])
         nparr     = np.frombuffer(img_bytes, np.uint8)
         frame     = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if frame is None:
+            return jsonify({'emotions': None, 'triggered': False})
+        if len(frame.shape) == 2:
+            frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
         emotions  = analyze_frame(frame)
 
         if emotions is None:
@@ -470,4 +488,4 @@ def reset():
 
 if __name__ == '__main__':
     print("\n🚀 EduSense — http://localhost:5000\n")
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True, ssl_context='adhoc')

@@ -52,6 +52,18 @@ except Exception as e:
     _fer_detector = None
     print(f'⚠️ FER not loaded: {e}')
 
+# Warm up FER at startup so first analysis is instant
+def _warmup_fer():
+    try:
+        dummy = np.zeros((48, 48, 3), dtype=np.uint8)
+        _fer_detector.detect_emotions(dummy)
+        print('✅ FER warmed up — instant analysis ready')
+    except Exception as e:
+        print(f'⚠️ FER warmup: {e}')
+
+if _fer_detector:
+    threading.Thread(target=_warmup_fer, daemon=True).start()
+
 # ── Helpers ───────────────────────────────────────────────
 
 def get_rag():
@@ -72,7 +84,9 @@ def analyze_frame(frame_bgr):
         detector = _fer_detector
         if detector is None:
             return None
-        result = detector.detect_emotions(frame_bgr)
+        # Resize to smaller size for faster analysis
+        small = cv2.resize(frame_bgr, (320, 240))
+        result = detector.detect_emotions(small)
         if not result:
             return None
         raw = result[0]['emotions']
@@ -86,17 +100,23 @@ def analyze_frame(frame_bgr):
         sad      = raw.get('sad',      0)
 
         mapped = {
-            'engagement':  happy * 0.7 + (1 - neutral) * 0.3,
-            'boredom':     neutral * 0.6 + sad * 0.4,
-            'confusion':   fear * 0.5 + surprise * 0.5,
-            'frustration': angry * 0.6 + disgust * 0.4,
+            'engagement':  happy * 0.8 + (1 - neutral) * 0.2,
+            'boredom':     neutral * 0.5 + sad * 0.3 + (1 - happy) * 0.2,
+            'confusion':   fear * 0.4 + surprise * 0.3 + (1 - happy) * 0.3,
+            'frustration': angry * 0.5 + disgust * 0.3 + fear * 0.2,
         }
         emotion_buffer.append(mapped)
         smoothed = {}
+        thresholds = {
+            'engagement':  0.35,
+            'boredom':     0.35,
+            'confusion':   0.30,
+            'frustration': 0.28,
+        }
         for e in mapped:
             avg = np.mean([h[e] for h in emotion_buffer])
             smoothed[e] = {'confidence': round(float(avg), 3),
-                          'positive': avg > 0.30}
+                          'positive': bool(avg > thresholds[e])}
         return smoothed
     except Exception as e:
         print(f"FER error: {e}")
@@ -132,7 +152,7 @@ def generate_session_report():
             'boredom':     round(h['emotions']['boredom']['confidence'], 3),
             'confusion':   round(h['emotions']['confusion']['confidence'], 3),
             'frustration': round(h['emotions']['frustration']['confidence'], 3),
-            'dissatisfied': is_dissatisfied(h['emotions']),
+            'dissatisfied': bool(is_dissatisfied(h['emotions'])),
         })
 
     # Overall stats
@@ -302,6 +322,10 @@ def analyze_frame_route():
         img_bytes = base64.b64decode(img_data.split(',')[1])
         nparr     = np.frombuffer(img_bytes, np.uint8)
         frame     = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if frame is None:
+            return jsonify({'emotions': None, 'triggered': False})
+        if len(frame.shape) == 2:
+            frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
         emotions  = analyze_frame(frame)
 
         if emotions is None:
@@ -320,7 +344,7 @@ def analyze_frame_route():
         else:
             session['trigger_count'] = max(0, session['trigger_count'] - 1)
 
-        if session['trigger_count'] >= 3 and now - session['last_trigger'] > 180:
+        if session['trigger_count'] >= 3 and now - session['last_trigger'] > 30:
             session['last_trigger']  = now
             session['trigger_count'] = 0
             triggered = True
@@ -470,4 +494,4 @@ def reset():
 
 if __name__ == '__main__':
     print("\n🚀 EduSense — http://localhost:5000\n")
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True, ssl_context='adhoc')
