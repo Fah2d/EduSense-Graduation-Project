@@ -1,603 +1,421 @@
 {
-  "session_duration": 377,
-  "total_checks": 70,
-  "focus_rate": 81.4,
-  "avg_engagement": 0.061,
-  "avg_boredom": 0.222,
-  "avg_confusion": 0.121,
-  "avg_frustration": 0.089,
-  "struggle_count": 1,
-  "notebooks_generated": 1,
+  "session_duration": 205,
+  "total_checks": 44,
+  "focus_rate": 59.1,
+  "avg_engagement": 0.009,
+  "avg_boredom": 0.163,
+  "avg_confusion": 0.067,
+  "avg_frustration": 0.276,
+  "struggle_count": 2,
+  "notebooks_generated": 2,
   "timeline": [
     {
-      "video_time": 2.0,
-      "engagement": 0.01,
-      "boredom": 0.23,
-      "confusion": 0.126,
-      "frustration": 0.042,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 4.0,
-      "engagement": 0.007,
-      "boredom": 0.249,
-      "confusion": 0.089,
-      "frustration": 0.031,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 6.0,
-      "engagement": 0.02,
-      "boredom": 0.201,
-      "confusion": 0.152,
-      "frustration": 0.085,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 8.0,
-      "engagement": 0.054,
-      "boredom": 0.153,
-      "confusion": 0.33,
-      "frustration": 0.108,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 10.0,
-      "engagement": 0.045,
-      "boredom": 0.165,
-      "confusion": 0.274,
-      "frustration": 0.088,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 12.0,
-      "engagement": 0.064,
-      "boredom": 0.138,
-      "confusion": 0.298,
-      "frustration": 0.085,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 14.0,
-      "engagement": 0.084,
-      "boredom": 0.114,
-      "confusion": 0.297,
-      "frustration": 0.082,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 16.0,
-      "engagement": 0.108,
-      "boredom": 0.097,
-      "confusion": 0.308,
-      "frustration": 0.082,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 20.0,
-      "engagement": 0.08,
-      "boredom": 0.135,
-      "confusion": 0.234,
-      "frustration": 0.071,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 22.0,
-      "engagement": 0.083,
-      "boredom": 0.123,
-      "confusion": 0.23,
-      "frustration": 0.076,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 24.0,
-      "engagement": 0.072,
-      "boredom": 0.141,
-      "confusion": 0.194,
-      "frustration": 0.06,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 26.0,
-      "engagement": 0.091,
-      "boredom": 0.116,
-      "confusion": 0.364,
-      "frustration": 0.06,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 30.0,
-      "engagement": 0.062,
-      "boredom": 0.132,
-      "confusion": 0.268,
-      "frustration": 0.077,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 32.0,
-      "engagement": 0.077,
-      "boredom": 0.129,
-      "confusion": 0.28,
-      "frustration": 0.065,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 38.0,
-      "engagement": 0.05,
-      "boredom": 0.134,
-      "confusion": 0.233,
-      "frustration": 0.09,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 48.0,
-      "engagement": 0.045,
-      "boredom": 0.139,
-      "confusion": 0.269,
-      "frustration": 0.096,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 50.0,
-      "engagement": 0.04,
-      "boredom": 0.138,
-      "confusion": 0.228,
-      "frustration": 0.099,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 52.0,
-      "engagement": 0.026,
-      "boredom": 0.156,
-      "confusion": 0.168,
+      "video_time": 6.1,
+      "engagement": 0.002,
+      "boredom": 0.224,
+      "confusion": 0.056,
       "frustration": 0.107,
       "dissatisfied": false
     },
     {
-      "video_time": 54.0,
-      "engagement": 0.016,
-      "boredom": 0.173,
-      "confusion": 0.124,
-      "frustration": 0.106,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 56.0,
-      "engagement": 0.012,
-      "boredom": 0.182,
-      "confusion": 0.125,
-      "frustration": 0.106,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 58.0,
-      "engagement": 0.008,
-      "boredom": 0.199,
-      "confusion": 0.108,
-      "frustration": 0.121,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 60.0,
-      "engagement": 0.006,
-      "boredom": 0.223,
-      "confusion": 0.094,
-      "frustration": 0.113,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 62.0,
-      "engagement": 0.004,
-      "boredom": 0.245,
-      "confusion": 0.071,
-      "frustration": 0.126,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 64.0,
-      "engagement": 0.004,
-      "boredom": 0.257,
-      "confusion": 0.064,
-      "frustration": 0.134,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 66.0,
-      "engagement": 0.004,
-      "boredom": 0.28,
-      "confusion": 0.063,
-      "frustration": 0.117,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 68.0,
-      "engagement": 0.005,
-      "boredom": 0.289,
-      "confusion": 0.062,
-      "frustration": 0.12,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 70.0,
-      "engagement": 0.004,
-      "boredom": 0.274,
-      "confusion": 0.063,
-      "frustration": 0.13,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 72.0,
-      "engagement": 0.003,
-      "boredom": 0.259,
-      "confusion": 0.069,
-      "frustration": 0.125,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 74.0,
-      "engagement": 0.003,
-      "boredom": 0.242,
-      "confusion": 0.074,
-      "frustration": 0.135,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 76.0,
-      "engagement": 0.003,
-      "boredom": 0.257,
-      "confusion": 0.068,
-      "frustration": 0.129,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 78.0,
-      "engagement": 0.003,
-      "boredom": 0.29,
-      "confusion": 0.06,
-      "frustration": 0.113,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 80.0,
-      "engagement": 0.004,
-      "boredom": 0.3,
-      "confusion": 0.058,
-      "frustration": 0.122,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 82.0,
-      "engagement": 0.004,
-      "boredom": 0.293,
-      "confusion": 0.057,
-      "frustration": 0.119,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 84.0,
+      "video_time": 8.1,
       "engagement": 0.002,
-      "boredom": 0.297,
-      "confusion": 0.053,
-      "frustration": 0.11,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 86.0,
-      "engagement": 0.002,
-      "boredom": 0.296,
-      "confusion": 0.053,
-      "frustration": 0.115,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 88.0,
-      "engagement": 0.002,
-      "boredom": 0.298,
-      "confusion": 0.051,
-      "frustration": 0.115,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 90.0,
-      "engagement": 0.003,
-      "boredom": 0.282,
-      "confusion": 0.054,
-      "frustration": 0.127,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 92.0,
-      "engagement": 0.003,
-      "boredom": 0.302,
-      "confusion": 0.051,
-      "frustration": 0.119,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 94.0,
-      "engagement": 0.003,
-      "boredom": 0.315,
-      "confusion": 0.05,
-      "frustration": 0.095,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 96.0,
-      "engagement": 0.002,
-      "boredom": 0.311,
-      "confusion": 0.05,
-      "frustration": 0.091,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 98.0,
-      "engagement": 0.003,
-      "boredom": 0.318,
-      "confusion": 0.052,
-      "frustration": 0.09,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 100.0,
-      "engagement": 0.004,
-      "boredom": 0.297,
-      "confusion": 0.056,
-      "frustration": 0.108,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 102.0,
-      "engagement": 0.004,
-      "boredom": 0.296,
-      "confusion": 0.057,
-      "frustration": 0.084,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 104.0,
-      "engagement": 0.003,
-      "boredom": 0.289,
-      "confusion": 0.057,
-      "frustration": 0.083,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 106.0,
-      "engagement": 0.003,
-      "boredom": 0.323,
-      "confusion": 0.053,
-      "frustration": 0.067,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 108.0,
-      "engagement": 0.005,
-      "boredom": 0.324,
-      "confusion": 0.056,
-      "frustration": 0.066,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 110.0,
-      "engagement": 0.006,
-      "boredom": 0.332,
-      "confusion": 0.054,
-      "frustration": 0.058,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 112,
-      "engagement": 0.009,
-      "boredom": 0.338,
-      "confusion": 0.054,
-      "frustration": 0.052,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 114.0,
-      "engagement": 0.007,
-      "boredom": 0.336,
-      "confusion": 0.052,
-      "frustration": 0.052,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 116.0,
-      "engagement": 0.012,
-      "boredom": 0.35,
-      "confusion": 0.051,
-      "frustration": 0.047,
-      "dissatisfied": true
-    },
-    {
-      "video_time": 118.0,
-      "engagement": 0.085,
-      "boredom": 0.274,
-      "confusion": 0.039,
-      "frustration": 0.052,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 132.0,
-      "engagement": 0.08,
       "boredom": 0.221,
-      "confusion": 0.189,
-      "frustration": 0.063,
+      "confusion": 0.049,
+      "frustration": 0.099,
       "dissatisfied": false
     },
     {
-      "video_time": 134,
-      "engagement": 0.167,
-      "boredom": 0.154,
-      "confusion": 0.192,
-      "frustration": 0.057,
+      "video_time": 10.1,
+      "engagement": 0.001,
+      "boredom": 0.198,
+      "confusion": 0.049,
+      "frustration": 0.148,
       "dissatisfied": false
     },
     {
-      "video_time": 136.0,
-      "engagement": 0.166,
+      "video_time": 12.1,
+      "engagement": 0.001,
+      "boredom": 0.184,
+      "confusion": 0.048,
+      "frustration": 0.227,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 14.1,
+      "engagement": 0.0,
+      "boredom": 0.178,
+      "confusion": 0.048,
+      "frustration": 0.266,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 16.1,
+      "engagement": 0.0,
+      "boredom": 0.165,
+      "confusion": 0.047,
+      "frustration": 0.314,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 18.1,
+      "engagement": 0.0,
+      "boredom": 0.153,
+      "confusion": 0.045,
+      "frustration": 0.346,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 20.1,
+      "engagement": 0.0,
+      "boredom": 0.152,
+      "confusion": 0.045,
+      "frustration": 0.364,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 22.1,
+      "engagement": 0.0,
+      "boredom": 0.148,
+      "confusion": 0.045,
+      "frustration": 0.38,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 24.1,
+      "engagement": 0.0,
       "boredom": 0.14,
-      "confusion": 0.189,
-      "frustration": 0.076,
-      "dissatisfied": false
+      "confusion": 0.045,
+      "frustration": 0.397,
+      "dissatisfied": true
     },
     {
-      "video_time": 138.0,
-      "engagement": 0.143,
-      "boredom": 0.143,
-      "confusion": 0.21,
-      "frustration": 0.082,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 140,
-      "engagement": 0.104,
-      "boredom": 0.189,
-      "confusion": 0.186,
-      "frustration": 0.076,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 142.0,
-      "engagement": 0.071,
-      "boredom": 0.264,
-      "confusion": 0.142,
-      "frustration": 0.056,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 144,
-      "engagement": 0.052,
-      "boredom": 0.299,
-      "confusion": 0.109,
-      "frustration": 0.06,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 264.0,
-      "engagement": 0.035,
-      "boredom": 0.295,
-      "confusion": 0.1,
-      "frustration": 0.053,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 266.0,
-      "engagement": 0.017,
-      "boredom": 0.292,
-      "confusion": 0.081,
-      "frustration": 0.055,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 268.0,
-      "engagement": 0.008,
-      "boredom": 0.289,
-      "confusion": 0.074,
-      "frustration": 0.047,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 270.0,
-      "engagement": 0.012,
-      "boredom": 0.27,
-      "confusion": 0.088,
-      "frustration": 0.067,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 272.0,
-      "engagement": 0.183,
-      "boredom": 0.175,
-      "confusion": 0.057,
-      "frustration": 0.101,
-      "dissatisfied": false
-    },
-    {
-      "video_time": 276.0,
-      "engagement": 0.32,
-      "boredom": 0.109,
+      "video_time": 26.1,
+      "engagement": 0.019,
+      "boredom": 0.133,
       "confusion": 0.04,
-      "frustration": 0.105,
+      "frustration": 0.346,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 28.1,
+      "engagement": 0.013,
+      "boredom": 0.137,
+      "confusion": 0.039,
+      "frustration": 0.349,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 30.1,
+      "engagement": 0.008,
+      "boredom": 0.142,
+      "confusion": 0.039,
+      "frustration": 0.356,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 32.1,
+      "engagement": 0.007,
+      "boredom": 0.144,
+      "confusion": 0.05,
+      "frustration": 0.3,
       "dissatisfied": false
     },
     {
-      "video_time": 278.0,
-      "engagement": 0.377,
-      "boredom": 0.066,
-      "confusion": 0.028,
-      "frustration": 0.132,
+      "video_time": 34.1,
+      "engagement": 0.005,
+      "boredom": 0.126,
+      "confusion": 0.057,
+      "frustration": 0.332,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 36.1,
+      "engagement": 0.004,
+      "boredom": 0.124,
+      "confusion": 0.072,
+      "frustration": 0.328,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 38.1,
+      "engagement": 0.004,
+      "boredom": 0.121,
+      "confusion": 0.075,
+      "frustration": 0.304,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 40.1,
+      "engagement": 0.003,
+      "boredom": 0.123,
+      "confusion": 0.084,
+      "frustration": 0.267,
       "dissatisfied": false
     },
     {
-      "video_time": 280.0,
-      "engagement": 0.464,
-      "boredom": 0.038,
-      "confusion": 0.023,
-      "frustration": 0.109,
+      "video_time": 42.1,
+      "engagement": 0.004,
+      "boredom": 0.125,
+      "confusion": 0.092,
+      "frustration": 0.25,
       "dissatisfied": false
     },
     {
-      "video_time": 288.0,
-      "engagement": 0.311,
-      "boredom": 0.104,
-      "confusion": 0.043,
-      "frustration": 0.091,
+      "video_time": 44.1,
+      "engagement": 0.004,
+      "boredom": 0.173,
+      "confusion": 0.083,
+      "frustration": 0.231,
       "dissatisfied": false
     },
     {
-      "video_time": 290.0,
-      "engagement": 0.227,
-      "boredom": 0.122,
-      "confusion": 0.103,
-      "frustration": 0.08,
+      "video_time": 46.1,
+      "engagement": 0.002,
+      "boredom": 0.155,
+      "confusion": 0.078,
+      "frustration": 0.273,
       "dissatisfied": false
     },
     {
-      "video_time": 292.0,
-      "engagement": 0.155,
+      "video_time": 48.1,
+      "engagement": 0.001,
+      "boredom": 0.171,
+      "confusion": 0.07,
+      "frustration": 0.278,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 50.1,
+      "engagement": 0.001,
+      "boredom": 0.15,
+      "confusion": 0.067,
+      "frustration": 0.32,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 52.1,
+      "engagement": 0.001,
+      "boredom": 0.134,
+      "confusion": 0.072,
+      "frustration": 0.352,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 56.1,
+      "engagement": 0.0,
+      "boredom": 0.132,
+      "confusion": 0.115,
+      "frustration": 0.275,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 62.1,
+      "engagement": 0.001,
       "boredom": 0.16,
-      "confusion": 0.108,
-      "frustration": 0.08,
+      "confusion": 0.093,
+      "frustration": 0.258,
       "dissatisfied": false
     },
     {
-      "video_time": 294.0,
-      "engagement": 0.094,
-      "boredom": 0.204,
+      "video_time": 64.1,
+      "engagement": 0.001,
+      "boredom": 0.187,
+      "confusion": 0.078,
+      "frustration": 0.227,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 66.1,
+      "engagement": 0.002,
+      "boredom": 0.22,
+      "confusion": 0.074,
+      "frustration": 0.167,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 68.1,
+      "engagement": 0.006,
+      "boredom": 0.175,
+      "confusion": 0.084,
+      "frustration": 0.233,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 70.1,
+      "engagement": 0.014,
+      "boredom": 0.149,
+      "confusion": 0.083,
+      "frustration": 0.277,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 72.1,
+      "engagement": 0.01,
+      "boredom": 0.195,
+      "confusion": 0.081,
+      "frustration": 0.21,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 74.1,
+      "engagement": 0.007,
+      "boredom": 0.201,
       "confusion": 0.097,
-      "frustration": 0.059,
+      "frustration": 0.167,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 78.1,
+      "engagement": 0.005,
+      "boredom": 0.186,
+      "confusion": 0.101,
+      "frustration": 0.19,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 80.1,
+      "engagement": 0.003,
+      "boredom": 0.196,
+      "confusion": 0.099,
+      "frustration": 0.174,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 82.1,
+      "engagement": 0.002,
+      "boredom": 0.199,
+      "confusion": 0.101,
+      "frustration": 0.168,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 84.1,
+      "engagement": 0.002,
+      "boredom": 0.171,
+      "confusion": 0.092,
+      "frustration": 0.234,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 86.1,
+      "engagement": 0.001,
+      "boredom": 0.135,
+      "confusion": 0.073,
+      "frustration": 0.355,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 88.1,
+      "engagement": 0.001,
+      "boredom": 0.107,
+      "confusion": 0.06,
+      "frustration": 0.444,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 90.1,
+      "engagement": 0.026,
+      "boredom": 0.156,
+      "confusion": 0.054,
+      "frustration": 0.363,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 92.1,
+      "engagement": 0.037,
+      "boredom": 0.168,
+      "confusion": 0.049,
+      "frustration": 0.342,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 94.1,
+      "engagement": 0.04,
+      "boredom": 0.198,
+      "confusion": 0.051,
+      "frustration": 0.297,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 96.1,
+      "engagement": 0.037,
+      "boredom": 0.167,
+      "confusion": 0.054,
+      "frustration": 0.33,
+      "dissatisfied": true
+    },
+    {
+      "video_time": 98.1,
+      "engagement": 0.071,
+      "boredom": 0.16,
+      "confusion": 0.062,
+      "frustration": 0.262,
+      "dissatisfied": false
+    },
+    {
+      "video_time": 100.1,
+      "engagement": 0.048,
+      "boredom": 0.178,
+      "confusion": 0.07,
+      "frustration": 0.227,
       "dissatisfied": false
     }
   ],
   "struggle_moments": [
     {
-      "timestamp": 94.266122341156,
-      "video_time": 94.01,
-      "video_time_fmt": "01:34",
-      "timestamp_fmt": "01:34",
+      "timestamp": 18.26816439628601,
+      "video_time": 18.057,
+      "video_time_fmt": "00:18",
+      "timestamp_fmt": "00:18",
       "emotions": {
-        "engagement": 0.003,
-        "boredom": 0.315,
-        "confusion": 0.05,
-        "frustration": 0.095
+        "engagement": 0.0,
+        "boredom": 0.153,
+        "confusion": 0.045,
+        "frustration": 0.346
       },
       "detected": [
-        "boredom"
+        "frustration"
       ],
-      "transcript": "15 is greater than our target, so eliminate it and all the values greater than it by moving right to the left of mid.  Repeating the process, we'll find the new average of the left and right indices. This is index 2 with the value of 5, which again we mark with mid.  5 is less than 12, so we eliminate it and all the values lessen it by moving left to the right of mid. Again we find the middle, which is index 4 with the value of 9.  This is less than 12, so we'll move our left pointer to the right of mid. Now our left and right pointers both point to 12."
+      "transcript": "Student appeared disengaged during the lecture."
+    },
+    {
+      "timestamp": 88.23773908615112,
+      "video_time": 88.053,
+      "video_time_fmt": "01:28",
+      "timestamp_fmt": "01:28",
+      "emotions": {
+        "engagement": 0.001,
+        "boredom": 0.107,
+        "confusion": 0.06,
+        "frustration": 0.444
+      },
+      "detected": [
+        "frustration"
+      ],
+      "transcript": "Student appeared disengaged during the lecture."
     }
   ],
   "notebooks": [
     {
-      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260331_120411_Binary_Search_Algorithm_Fundam.ipynb",
-      "filename": "20260331_120411_Binary_Search_Algorithm_Fundam.ipynb",
-      "timestamp": "01:34",
+      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260428_002409_Binary_Search_Algorithm_Basics.ipynb",
+      "filename": "20260428_002409_Binary_Search_Algorithm_Basics.ipynb",
+      "timestamp": "00:18",
       "detected": [
-        "boredom"
+        "frustration"
       ],
       "index": 1,
-      "video_time": 94.01
+      "video_time": 18.057
+    },
+    {
+      "path": "C:\\Users\\saeed\\OneDrive\\Desktop\\GraduationProjectEduSense\\EduSense-Graduation-Project\\generated_notebooks/20260428_002426_Binary_Search_Algorithm.ipynb",
+      "filename": "20260428_002426_Binary_Search_Algorithm.ipynb",
+      "timestamp": "01:28",
+      "detected": [
+        "frustration"
+      ],
+      "index": 2,
+      "video_time": 88.053
     }
   ]
 }
