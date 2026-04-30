@@ -1067,7 +1067,7 @@ async function loadTeacherTopics() {
     const moments=res.moments||[];
     if(!moments.length){el.innerHTML='<div class="empty-state">No struggle data yet.</div>';return;}
     const bySubj={};
-    moments.forEach(m=>{const n=(m.subjects?.name)||'Unknown Subject';if(!bySubj[n])bySubj[n]=0;bySubj[n]++;});
+    moments.forEach(m=>{const n=m.subject_id||'Unknown';if(!bySubj[n])bySubj[n]=0;bySubj[n]++;});
     const max=Math.max(...Object.values(bySubj));
     el.innerHTML=Object.entries(bySubj).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([name,cnt])=>{
       const pct=Math.min((cnt/max)*100,100);
@@ -1180,7 +1180,7 @@ async function openModal() {
     const res=await api('/api/subjects/all');
     const subjects=res.subjects||[];
     sel.innerHTML=subjects.length
-      ? subjects.map(s=>`<option value="${s.id}|${s.teacher_id}">${s.profiles?.full_name||s.teacher_name||'Unknown Teacher'} — ${s.name}</option>`).join('')
+      ? subjects.map(s=>`<option value="${s.id}|${s.teacher_id}">${s.profiles?.full_name||'Unknown'} — ${s.name}</option>`).join('')
       : '<option value="">No subjects available</option>';
   } catch(e){sel.innerHTML='<option value="">Could not load subjects</option>';}
 }
