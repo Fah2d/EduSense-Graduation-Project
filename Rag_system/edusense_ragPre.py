@@ -83,31 +83,16 @@ class PDFKnowledgeBase:
         print(f"\n✅ Total: {self.index.ntotal} chunks")
         return total
 
-    def retrieve(self, query: str, n_results: int = 5,
-                 subject_id: str = None) -> List[Dict]:
-        """
-        Retrieve relevant chunks.
-        If subject_id is provided, results are filtered to chunks whose
-        source starts with '{subject_id}::' (set during teacher upload).
-        Falls back to all chunks if the subject has no indexed PDFs.
-        """
+    def retrieve(self, query: str, n_results: int = 5) -> List[Dict]:
         if self.index.ntotal == 0:
             return []
         q_emb  = self.embedder.encode([query], normalize_embeddings=True)
-        # Over-fetch so we have enough after filtering
-        fetch_n = min(max(n_results * 6, 30), self.index.ntotal)
-        scores, idxs = self.index.search(q_emb.astype('float32'), fetch_n)
-        raw = [
+        n      = min(n_results, self.index.ntotal)
+        scores, idxs = self.index.search(q_emb.astype('float32'), n)
+        return [
             {**self.metadata[i], 'relevance': float(s)}
             for s, i in zip(scores[0], idxs[0]) if i >= 0
         ]
-        if subject_id:
-            prefix   = f"{subject_id[:8]}::"
-            filtered = [r for r in raw if r['source'].startswith(prefix)]
-            if filtered:
-                return filtered[:n_results]
-            # No subject-specific PDFs — fall back to global KB
-        return raw[:n_results]
 
     def count(self):
         return self.index.ntotal
@@ -302,9 +287,8 @@ class EduSenseRAG:
     def upload_textbooks(self, pdf_paths: List[str]) -> int:
         return self.kb.add_multiple_pdfs(pdf_paths)
 
-    def process_with_text(self, transcript: str, emotion_state: Dict,
-                          subject_id: str = None) -> str:
-        chunks = self.kb.retrieve(transcript, n_results=5, subject_id=subject_id)
+    def process_with_text(self, transcript: str, emotion_state: Dict) -> str:
+        chunks = self.kb.retrieve(transcript, n_results=5)
         data   = self.generator.generate(transcript, chunks, emotion_state)
         ts     = time.strftime("%Y%m%d_%H%M%S")
         topic  = data.get('title', 'notebook').replace(' ', '_')[:30]

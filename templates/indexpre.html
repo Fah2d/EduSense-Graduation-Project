@@ -544,7 +544,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:0 48px}
       <div class="sbi" onclick="ttab('heatmap',this)"><span class="sbi-ic"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="3" height="3" rx=".5"/><rect x="6.5" y="2" width="3" height="3" rx=".5"/><rect x="11" y="2" width="3" height="3" rx=".5"/><rect x="2" y="6.5" width="3" height="3" rx=".5"/><rect x="6.5" y="6.5" width="3" height="3" rx=".5"/><rect x="11" y="6.5" width="3" height="3" rx=".5"/><rect x="2" y="11" width="3" height="3" rx=".5"/><rect x="6.5" y="11" width="3" height="3" rx=".5"/><rect x="11" y="11" width="3" height="3" rx=".5"/></svg></span>Class Heatmap</div>
       <div class="sbi" onclick="ttab('students',this)"><span class="sbi-ic"><svg viewBox="0 0 16 16"><circle cx="6" cy="5" r="2.5"/><path d="M1 14c0-3 2-4.5 5-4.5s5 1.5 5 4.5"/><circle cx="12" cy="6" r="2"/><path d="M11 9c1.5 0 4 .8 4 3"/></svg></span>Students</div>
       <div class="sbi" onclick="ttab('insights',this)"><span class="sbi-ic"><svg viewBox="0 0 16 16"><path d="M8 2a5 5 0 100 8"/><line x1="8" y1="13" x2="8" y2="14"/><line x1="5" y1="10.5" x2="11" y2="10.5"/><line x1="6" y1="12" x2="10" y2="12"/></svg></span>Insights</div>
-      <div class="sbi" onclick="ttab('knowledge',this)"><span class="sbi-ic"><svg viewBox="0 0 16 16"><path d="M3 2h7l3 3v9H3z"/><polyline points="10,2 10,5 13,5"/><line x1="6" y1="8" x2="10" y2="8"/><line x1="6" y1="11" x2="10" y2="11"/></svg></span>Knowledge Base</div>
       <div class="sbfoot">
         <div class="sbav" id="tea-av">?</div>
         <div class="sbu"><div class="sbun" id="tea-name">Loading...</div><div class="sbur" id="tea-dept">KKU</div></div>
@@ -592,56 +591,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:0 48px}
       <div class="tp" id="t-insights">
         <div class="ph"><h1>Insights & Recommendations</h1><p>Based on class-wide emotion data</p></div>
         <div id="insights-list"><div class="empty-state"><div class="spinner"></div><p>Generating insights...</p></div></div>
-      </div>
-
-      <!-- KNOWLEDGE BASE -->
-      <div class="tp" id="t-knowledge">
-        <div class="ph"><h1>Knowledge Base</h1><p>Upload course PDFs — EduSense uses them to generate personalised student notebooks</p></div>
-
-        <!-- Upload card -->
-        <div class="card fa" id="kb-upload-card">
-          <div class="ch3">Upload Textbook or Lecture Notes</div>
-          <div class="cp">PDF files are indexed automatically. Students' notebooks will be grounded in your course material.</div>
-          <div style="margin-top:16px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
-            <div class="fld" style="flex:1;min-width:180px;margin-bottom:0">
-              <label>Subject</label>
-              <select id="kb-subject-select" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:13px;background:var(--bg);color:var(--text);outline:none">
-                <option value="">Loading subjects...</option>
-              </select>
-            </div>
-            <div style="flex:2;min-width:200px">
-              <label style="display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:6px">PDF File</label>
-              <div id="kb-drop-zone" style="border:1.5px dashed var(--border2);border-radius:8px;padding:14px 20px;cursor:pointer;transition:all .15s;text-align:center;font-size:13px;color:var(--text3)"
-                onclick="document.getElementById('kb-file-input').click()"
-                ondragover="event.preventDefault();this.style.borderColor='var(--text)';this.style.background='var(--bg2)'"
-                ondragleave="this.style.borderColor='var(--border2)';this.style.background=''"
-                ondrop="kbHandleDrop(event)">
-                <span id="kb-drop-label">📄 Click to select or drag & drop a PDF</span>
-              </div>
-              <input type="file" id="kb-file-input" accept=".pdf" style="display:none" onchange="kbFileSelected(this)">
-            </div>
-            <button class="btn btn-primary" id="kb-upload-btn" onclick="kbUpload()" style="padding:9px 18px;flex-shrink:0" disabled>Upload & Index</button>
-          </div>
-          <div class="err-msg" id="kb-err"></div>
-          <div id="kb-progress" style="display:none;margin-top:12px">
-            <div style="height:4px;background:var(--bg3);border-radius:100px;overflow:hidden">
-              <div id="kb-progress-bar" style="height:100%;width:0%;background:var(--green);border-radius:100px;transition:width .3s"></div>
-            </div>
-            <div id="kb-progress-msg" style="font-size:12px;color:var(--text3);margin-top:6px">Indexing...</div>
-          </div>
-        </div>
-
-        <!-- Uploaded PDFs list -->
-        <div class="card fa fa1" style="margin-top:0">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-            <div><div class="ch3">Indexed Documents</div><div class="cp" style="margin-bottom:0">PDFs currently in the knowledge base</div></div>
-            <div id="kb-chunk-badge" style="font-size:12px;font-weight:600;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 10px">— chunks</div>
-          </div>
-          <div id="kb-pdfs-list">
-            <div class="skeleton loading-row"></div>
-            <div class="skeleton loading-row"></div>
-          </div>
-        </div>
       </div>
     </div></div>
   </div>
@@ -1165,7 +1114,6 @@ function ttab(id, el) {
   if(id==='students') loadTeacherStudents();
   if(id==='insights') loadTeacherInsights();
   if(id==='overview') loadTeacherDashboard();
-  if(id==='knowledge') loadKnowledgeBase();
 }
 
 // ═══════════════════════════════════════════════
@@ -1432,168 +1380,9 @@ function toast(msg, dur=3500) {
   setTimeout(()=>el.classList.remove('show'), dur);
 }
 
-
 // ═══════════════════════════════════════════════
-//  KNOWLEDGE BASE
+//  BOOT
 // ═══════════════════════════════════════════════
-let kbSelectedFile = null;
-
-async function loadKnowledgeBase() {
-  // Load subjects into dropdown
-  try {
-    const res = await api('/api/teacher/subjects-with-pdfs');
-    const sel = document.getElementById('kb-subject-select');
-    const subjects = res.subjects || [];
-    if (!subjects.length) {
-      sel.innerHTML = '<option value="">No subjects found — create one first</option>';
-    } else {
-      sel.innerHTML = subjects.map(s =>
-        `<option value="${s.id}">${s.name} (${s.ready}/${s.total} PDFs ready)</option>`
-      ).join('');
-    }
-  } catch(e) {
-    document.getElementById('kb-subject-select').innerHTML = '<option value="">Could not load subjects</option>';
-  }
-  // Load PDF list
-  await kbRefreshList();
-}
-
-async function kbRefreshList() {
-  const list = document.getElementById('kb-pdfs-list');
-  try {
-    const [pdfsRes, statsRes] = await Promise.all([
-      api('/api/teacher/pdfs'),
-      api('/api/kb-stats').catch(() => ({chunks: 0})),
-    ]);
-    const pdfs = pdfsRes.pdfs || [];
-    document.getElementById('kb-chunk-badge').textContent = `${statsRes.chunks} chunks`;
-
-    if (!pdfs.length) {
-      list.innerHTML = '<div class="empty-state">No PDFs uploaded yet. Add your first textbook above.</div>';
-      return;
-    }
-
-    const fmtSize = b => b > 1048576 ? (b/1048576).toFixed(1)+' MB' : (b/1024).toFixed(0)+' KB';
-    const statusBadge = s => ({
-      ready:      '<span class="bdg bg">✓ Ready</span>',
-      processing: '<span class="bdg ba">⏳ Indexing</span>',
-      error:      '<span class="bdg br">✗ Error</span>',
-    }[s] || `<span class="bdg bn">${s}</span>`);
-
-    list.innerHTML = pdfs.map(p => `
-      <div class="ri" id="kb-row-${p.id}">
-        <div class="ric">📄</div>
-        <div class="rii">
-          <div class="rit">${p.original_name}</div>
-          <div class="rim">${(p.subjects||{}).name||'Unknown subject'}<span class="dot">·</span>${fmtSize(p.file_size||0)}<span class="dot">·</span>${p.chunk_count||0} chunks</div>
-        </div>
-        ${statusBadge(p.status)}
-        <button class="btn btn-sm btn-danger" style="margin-left:8px" onclick="kbDeletePdf('${p.id}','${p.original_name}')">Delete</button>
-      </div>`).join('');
-
-    // Poll for any still-processing PDFs
-    if (pdfs.some(p => p.status === 'processing')) {
-      setTimeout(kbRefreshList, 4000);
-    }
-  } catch(e) {
-    list.innerHTML = '<div class="empty-state">Could not load documents.</div>';
-  }
-}
-
-function kbFileSelected(input) {
-  const file = input.files[0];
-  if (!file) return;
-  kbSelectedFile = file;
-  document.getElementById('kb-drop-label').textContent = `📄 ${file.name}`;
-  document.getElementById('kb-drop-zone').style.borderColor = 'var(--green)';
-  document.getElementById('kb-upload-btn').disabled = false;
-}
-
-function kbHandleDrop(event) {
-  event.preventDefault();
-  document.getElementById('kb-drop-zone').style.borderColor = 'var(--border2)';
-  document.getElementById('kb-drop-zone').style.background = '';
-  const file = event.dataTransfer.files[0];
-  if (file && file.name.endsWith('.pdf')) {
-    kbSelectedFile = file;
-    document.getElementById('kb-drop-label').textContent = `📄 ${file.name}`;
-    document.getElementById('kb-drop-zone').style.borderColor = 'var(--green)';
-    document.getElementById('kb-upload-btn').disabled = false;
-  } else {
-    toast('Please drop a PDF file.');
-  }
-}
-
-async function kbUpload() {
-  const subject_id = document.getElementById('kb-subject-select').value;
-  const errEl      = document.getElementById('kb-err');
-  errEl.classList.remove('show');
-
-  if (!subject_id) { showErr(errEl, 'Please select a subject.'); return; }
-  if (!kbSelectedFile) { showErr(errEl, 'Please select a PDF file.'); return; }
-
-  const btn = document.getElementById('kb-upload-btn');
-  const prog = document.getElementById('kb-progress');
-  const bar  = document.getElementById('kb-progress-bar');
-  const msg  = document.getElementById('kb-progress-msg');
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Uploading...';
-  prog.style.display = 'block';
-  bar.style.width = '30%';
-  msg.textContent = 'Uploading file...';
-
-  try {
-    const form = new FormData();
-    form.append('file', kbSelectedFile);
-    form.append('subject_id', subject_id);
-
-    const res = await fetch('/api/teacher/upload-pdf', {
-      method: 'POST',
-      headers: authToken ? {'Authorization': `Bearer ${authToken}`} : {},
-      body: form,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Upload failed');
-
-    bar.style.width = '70%';
-    msg.textContent = 'Indexing PDF in background...';
-    toast(`✅ "${kbSelectedFile.name}" uploaded — indexing in background`);
-
-    // Reset
-    kbSelectedFile = null;
-    document.getElementById('kb-drop-label').textContent = '📄 Click to select or drag & drop a PDF';
-    document.getElementById('kb-drop-zone').style.borderColor = 'var(--border2)';
-    document.getElementById('kb-file-input').value = '';
-
-    setTimeout(() => { bar.style.width='100%'; msg.textContent='Done!'; }, 500);
-    setTimeout(() => { prog.style.display='none'; bar.style.width='0%'; }, 2000);
-
-    await kbRefreshList();
-    // Refresh subject dropdown to update counts
-    await loadKnowledgeBase();
-  } catch(e) {
-    showErr(errEl, e.message);
-    prog.style.display = 'none';
-    bar.style.width = '0%';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Upload & Index';
-  }
-}
-
-async function kbDeletePdf(id, name) {
-  if (!confirm(`Delete "${name}" from the knowledge base?`)) return;
-  try {
-    await api(`/api/teacher/pdfs/${id}`, {method: 'DELETE'});
-    toast(`Deleted "${name}"`);
-    await kbRefreshList();
-  } catch(e) {
-    toast(`Error: ${e.message}`);
-  }
-}
-
-
 window.addEventListener('load', () => {
   setTheme(curTheme);
   if (authToken && currentUser) {
