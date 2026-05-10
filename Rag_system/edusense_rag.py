@@ -86,27 +86,45 @@ class PDFKnowledgeBase:
     def retrieve(self, query: str, n_results: int = 5,
                  subject_id: str = None) -> List[Dict]:
         """
-        Retrieve relevant chunks.
-        If subject_id is provided, results are filtered to chunks whose
-        source starts with '{subject_id}::' (set during teacher upload).
-        Falls back to all chunks if the subject has no indexed PDFs.
+        Retrieve relevant chunks scoped strictly to this subject's uploaded PDFs.
+
+        Logic:
+          1. If subject_id provided → only return chunks from that subject (prefix match).
+          2. If no subject-specific chunks exist → return [] with a warning.
+             This prevents cross-subject contamination (e.g. binary search chunks
+             appearing in a Big Data notebook).
+          3. If no subject_id → return top results from the full knowledge base.
         """
         if self.index.ntotal == 0:
+            print('⚠️  RAG: knowledge base is empty — no chunks to retrieve')
             return []
-        q_emb  = self.embedder.encode([query], normalize_embeddings=True)
-        # Over-fetch so we have enough after filtering
-        fetch_n = min(max(n_results * 6, 30), self.index.ntotal)
+
+        q_emb   = self.embedder.encode([query], normalize_embeddings=True)
+        fetch_n = min(max(n_results * 10, 50), self.index.ntotal)
         scores, idxs = self.index.search(q_emb.astype('float32'), fetch_n)
         raw = [
             {**self.metadata[i], 'relevance': float(s)}
             for s, i in zip(scores[0], idxs[0]) if i >= 0
         ]
+
         if subject_id:
             prefix   = f"{subject_id[:8]}::"
             filtered = [r for r in raw if r['source'].startswith(prefix)]
             if filtered:
+                print(f'✅ RAG: retrieved {len(filtered[:n_results])} chunks '
+                      f'from subject {prefix} (out of {len(filtered)} matches)')
                 return filtered[:n_results]
-            # No subject-specific PDFs — fall back to global KB
+            else:
+                # No PDFs uploaded for this subject — do NOT fall back to other subjects
+                # This is the key fix: returning chunks from other subjects causes wrong notebooks
+                all_sources = sorted(set(m['source'] for m in self.metadata))
+                print(f'⚠️  RAG: no chunks found for subject prefix "{prefix}"')
+                print(f'   Available sources: {all_sources}')
+                print(f'   → Returning empty context. Upload a PDF for this subject.')
+                return []
+
+        # No subject filter — return best global results
+        print(f'⚠️  RAG: no subject_id provided — using global knowledge base')
         return raw[:n_results]
 
     def count(self):
@@ -161,13 +179,25 @@ class NotebookGenerator:
     def generate(self, transcript: str, retrieved_chunks: List[Dict],
                  emotion_state: Dict) -> Dict:
 
-        context      = "\n\n".join([
-            f"[From {c['source']}, page {c['page']}]\n{c['text']}"
-            for c in retrieved_chunks[:4]
-        ])
         detected     = [e for e, v in emotion_state.items()
                        if isinstance(v, dict) and v.get('positive')]
         emotion_desc = ", ".join(detected) if detected else "low engagement"
+
+        # Only use chunks that actually belong to this session's subject
+        if retrieved_chunks:
+            context = "\n\n".join([
+                f"[From {c['source']}, page {c['page']}]\n{c['text']}"
+                for c in retrieved_chunks[:4]
+            ])
+            context_section = f"""TEXTBOOK CONTENT (from this subject's uploaded materials):
+{context}"""
+        else:
+            # No subject-specific PDFs uploaded — base notebook entirely on transcript
+            context_section = (
+                "NOTE: No textbook PDFs have been uploaded for this subject yet. "
+                "Generate the notebook based solely on the lecture transcript below."
+            )
+            print('⚠️  Generating notebook from transcript only — no subject PDFs found')
 
         prompt = f"""You are an expert CS tutor creating a personalized study notebook.
 
@@ -176,8 +206,7 @@ A student showed signs of {emotion_desc} during this lecture:
 TRANSCRIPT:
 {transcript[:800]}
 
-TEXTBOOK CONTENT:
-{context}
+{context_section}
 
 Return ONLY valid JSON (no markdown, no backticks):
 {{
@@ -296,8 +325,9 @@ class EduSenseRAG:
         self.generator   = NotebookGenerator(anthropic_api_key)
         print("\n✅ EduSense RAG System ready")
 
-    def upload_textbook(self, pdf_path: str, name: str = None) -> int:
-        return self.kb.add_pdf(pdf_path, name)
+    def upload_textbook(self, pdf_path: str, name: str = None, source_name: str = None) -> int:
+        # source_name takes priority (carries the subject prefix e.g. "abc12345::BigData")
+        return self.kb.add_pdf(pdf_path, source_name or name)
 
     def upload_textbooks(self, pdf_paths: List[str]) -> int:
         return self.kb.add_multiple_pdfs(pdf_paths)

@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduSense — Final Graduation Presentation 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+<style>
+/* ═══ THEME TOKENS ═══════════════════════════════════════ */
+:root {
+  --bg:      #ffffff;
+  --bg2:     #f7f7f6;
+  --bg3:     #f0f0ef;
+  --bg4:     #e8e8e6;
+  --border:  #e4e4e2;
+  --border2: #d0d0ce;
+  --text:    #1a1a18;
+  --text2:   #52524e;
+  --text3:   #8e8e88;
+  --green:   #16a34a;
+  --green-bg:#f0fdf4;
+  --amber:   #d97706;
+  --amber-bg:#fffbeb;
+  --red:     #dc2626;
+  --red-bg:  #fef2f2;
+  --blue:    #2563eb;
+  --blue-bg: #eff6ff;
+  --sans:    'Instrument Sans', sans-serif;
+  --serif:   'Instrument Serif', serif;
+  --mono:    'Space Mono', monospace;
+  --sh:      0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --sh2:     0 8px 24px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.06);
+}
+[data-theme="dark"] {
+  --bg:      #111110;
+  --bg2:     #1a1a18;
+  --bg3:     #222220;
+  --bg4:     #2a2a28;
+  --border:  #2e2e2c;
+  --border2: #3a3a38;
+  --text:    #f0f0ec;
+  --text2:   #a0a09a;
+  --text3:   #606060;
+  --green:   #4ade80;
+  --green-bg:#14291e;
+  --amber:   #fbbf24;
+  --amber-bg:#2a2010;
+  --red:     #f87171;
+  --red-bg:  #2a1414;
+  --blue:    #60a5fa;
+  --blue-bg: #1e2a3a;
+  --sh:      0 1px 3px rgba(0,0,0,.3);
+  --sh2:     0 8px 24px rgba(0,0,0,.5);
+}
+
+/* ═══ RESET ══════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.6;
+  transition:background .2s, color .2s;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+
+/* ═══ NAV ════════════════════════════════════════════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:56px; padding:0 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  transition:background .2s, border-color .2s;
+}
+.nav-logo {
+  font-family:var(--serif); font-style:italic; font-size:1.2rem;
+  letter-spacing:-.02em; color:var(--text);
+  display:flex; align-items:center; gap:8px;
+}
+.lmark {
+  width:22px; height:22px; background:var(--text); border-radius:5px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:background .2s;
+}
+.lmark svg { fill:var(--bg); width:12px; height:12px; transition:fill .2s; }
+.nav-links { display:flex; gap:0; list-style:none; flex-wrap:wrap; }
+.nav-links a {
+  font-family:var(--mono); font-size:.58rem; letter-spacing:.04em;
+  color:var(--text3); text-decoration:none;
+  padding:.28rem .55rem; border-radius:5px; transition:all .15s; white-space:nowrap;
+}
+.nav-links a:hover { color:var(--text); background:var(--bg3); }
+.nav-links a.on { color:var(--text); font-weight:700; }
+.nav-right { display:flex; align-items:center; gap:10px; }
+
+/* Theme toggle */
+.ttoggle {
+  display:flex; background:var(--bg3); border:1px solid var(--border);
+  border-radius:8px; padding:3px; gap:2px;
+}
+.topt {
+  width:30px; height:26px; border-radius:5px; border:none;
+  background:transparent; color:var(--text3); font-size:12px; cursor:pointer;
+  transition:all .15s; display:flex; align-items:center; justify-content:center;
+}
+.topt.on { background:var(--bg); color:var(--text); box-shadow:var(--sh); }
+.nav-badge {
+  font-family:var(--mono); font-size:.58rem; letter-spacing:.08em;
+  padding:.25rem .65rem; border:1px solid var(--border);
+  color:var(--text3); border-radius:20px;
+}
+
+/* ═══ LAYOUT ═════════════════════════════════════════════ */
+section {
+  position:relative; z-index:1;
+  padding:6rem 2rem; max-width:1100px; margin:0 auto;
+}
+section + section { padding-top:4rem; }
+.divider {
+  height:1px;
+  background:linear-gradient(90deg, var(--border) 0%, transparent 100%);
+  position:relative; z-index:1;
+  margin:0 32px;
+}
+.section-tag {
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.18em;
+  color:var(--text3); text-transform:uppercase;
+  margin-bottom:1.1rem; display:flex; align-items:center; gap:.75rem;
+}
+.section-tag::before { content:''; width:24px; height:1px; background:var(--text3); display:block; }
+.new-pill {
+  font-family:var(--mono); font-size:.55rem; letter-spacing:.06em;
+  background:var(--green-bg); border:1px solid rgba(22,163,74,.25);
+  color:var(--green); border-radius:100px; padding:.15rem .55rem;
+  text-transform:uppercase; vertical-align:middle; margin-left:.5rem;
+}
+h2 {
+  font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:400; letter-spacing:-.03em; line-height:1.05; margin-bottom:.4rem;
+}
+h2 em { font-style:italic; color:var(--text3); }
+h3 {
+  font-family:var(--sans); font-size:.95rem; font-weight:600;
+  letter-spacing:-.01em; margin-bottom:.4rem;
+}
+.sub { font-size:.95rem; color:var(--text2); margin-bottom:3rem; max-width:58ch; line-height:1.7; }
+
+/* ═══ HERO ═══════════════════════════════════════════════ */
+#hero {
+  min-height:100vh; display:flex; flex-direction:column;
+  justify-content:center; padding-top:56px; padding-bottom:4rem;
+  max-width:none; position:relative; overflow:hidden;
+}
+.hero-inner { max-width:1100px; margin:0 auto; width:100%; padding:0 2rem; position:relative; z-index:1; }
+#hero::after {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:60px 60px;
+  opacity:.4; animation:gridDrift 24s linear infinite; pointer-events:none;
+}
+@keyframes gridDrift { 0%{transform:translateY(0)} 100%{transform:translateY(60px)} }
+.hero-eyebrow {
+  font-family:var(--mono); font-size:.65rem; letter-spacing:.18em;
+  color:var(--text3); text-transform:uppercase; margin-bottom:1.75rem;
+  display:flex; align-items:center; gap:1rem;
+  animation:fadeUp .7s ease both;
+}
+.hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--text3); }
+h1.hero-title {
+  font-family:var(--serif); font-size:clamp(3rem,8vw,7rem);
+  font-weight:400; letter-spacing:-.04em; line-height:.95;
+  margin-bottom:.45em; animation:fadeUp .7s .1s ease both;
+}
+h1.hero-title .accent { color:var(--green); }
+h1.hero-title .dim    { color:var(--text3); }
+.hero-desc {
+  font-size:1rem; color:var(--text2); max-width:52ch;
+  margin-bottom:2.5rem; animation:fadeUp .7s .2s ease both; line-height:1.75;
+}
+.hero-pills { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:3rem; animation:fadeUp .7s .3s ease both; }
+.pill {
+  font-family:var(--mono); font-size:.6rem; padding:.28rem .7rem;
+  border-radius:100px; border:1px solid var(--border); color:var(--text3);
+  transition:all .15s; cursor:default;
+}
+.pill:hover { border-color:var(--text2); color:var(--text2); }
+.pill.new-f { border-color:rgba(22,163,74,.3); color:var(--green); background:var(--green-bg); }
+.hero-stats { display:flex; gap:3rem; flex-wrap:wrap; animation:fadeUp .7s .4s ease both; }
+.hero-stat .val {
+  font-family:var(--serif); font-size:2.4rem; font-weight:400;
+  color:var(--text); line-height:1; letter-spacing:-.04em;
+}
+.hero-stat .val.g { color:var(--green); }
+.hero-stat .lbl { font-size:.78rem; color:var(--text3); margin-top:.2rem; }
+.hero-scroll {
+  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:.4rem;
+  font-family:var(--mono); font-size:.58rem; color:var(--text3);
+  animation:floatY 2.2s ease-in-out infinite;
+}
+.hero-scroll::after { content:'↓'; font-size:.9rem; color:var(--text2); }
+@keyframes floatY { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+@keyframes fadeUp  { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+
+/* ═══ CARDS ══════════════════════════════════════════════ */
+.card {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; padding:20px 22px;
+  transition:border-color .15s;
+}
+.card:hover { border-color:var(--border2); }
+.card-title { font-size:13px; font-weight:600; letter-spacing:-.1px; margin-bottom:4px; }
+.card-sub   { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+@media(max-width:768px) { .g2,.g3 { grid-template-columns:1fr; } }
+
+/* ═══ PROBLEM ════════════════════════════════════════════ */
+.prob-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:2.5rem; }
+@media(max-width:640px) { .prob-grid { grid-template-columns:1fr; } }
+.big-stat {
+  background:var(--bg2); border:1px solid var(--border);
+  border-left:3px solid var(--red); padding:2.5rem 2rem;
+  border-radius:10px; display:flex; flex-direction:column; justify-content:center; grid-row:span 2;
+}
+.big-stat .num { font-family:var(--serif); font-size:5rem; font-weight:400; color:var(--red); line-height:1; letter-spacing:-.05em; }
+.big-stat .desc { color:var(--text2); font-size:.95rem; margin-top:.75rem; line-height:1.65; }
+.big-stat .note { font-family:var(--mono); font-size:.65rem; color:var(--text3); margin-top:1rem; }
+.prob-card {
+  background:var(--bg); border:1px solid var(--border);
+  border-left:2px solid var(--green); padding:1.25rem 1.5rem;
+  border-radius:10px; transition:transform .15s;
+}
+.prob-card:hover { transform:translateX(4px); }
+.prob-card .icon { font-size:1.1rem; margin-bottom:.4rem; }
+.prob-card h3 { font-size:.9rem; margin-bottom:.35rem; }
+.prob-card p  { font-size:.82rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ OBJECTIVES ═════════════════════════════════════════ */
+.obj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2.5rem; }
+@media(max-width:768px) { .obj-grid { grid-template-columns:1fr 1fr; } }
+.obj-card {
+  background:var(--bg); border:1px solid var(--border);
+  border-top:2px solid var(--acc, var(--green));
+  padding:1.75rem 1.5rem; border-radius:10px;
+  position:relative; transition:transform .15s;
+}
+.obj-card:hover { transform:translateY(-3px); }
+.obj-num { font-family:var(--mono); font-size:.6rem; color:var(--acc, var(--green)); margin-bottom:.65rem; }
+.obj-card h3 { font-size:.9rem; margin-bottom:.4rem; }
+.obj-card p  { font-size:.8rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ ARCH LAYERS ════════════════════════════════════════ */
+.arch-layers {
+  border:1px solid var(--border); border-radius:10px;
+  overflow:hidden; margin-top:2.5rem;
+}
+.arch-layer {
+  display:grid; grid-template-columns:160px 1fr;
+  border-bottom:1px solid var(--border); transition:background .15s;
+}
+.arch-layer:last-child { border-bottom:none; }
+.arch-layer:hover { background:var(--bg2); }
+.arch-layer-lbl {
+  background:var(--bg2); border-right:1px solid var(--border);
+  padding:1.25rem; display:flex; flex-direction:column; justify-content:center;
+}
+.arch-layer-lbl .al-n { font-family:var(--mono); font-size:.58rem; color:var(--text3); margin-bottom:.3rem; }
+.arch-layer-lbl h3 { font-size:.85rem; color:var(--text); }
+.arch-layer-body { padding:1rem 1.25rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+.chip {
+  font-family:var(--mono); font-size:.6rem;
+  padding:.22rem .6rem; border-radius:6px;
+  border:1px solid var(--border); color:var(--text2); white-space:nowrap;
+  transition:all .15s;
+}
+.chip:hover { border-color:var(--border2); color:var(--text); }
+.chip.g { border-color:rgba(22,163,74,.25); color:var(--green); background:var(--green-bg); }
+.chip.b { border-color:rgba(37,99,235,.25); color:var(--blue); background:var(--blue-bg); }
+.chip.a { border-color:rgba(217,119,6,.25); color:var(--amber); background:var(--amber-bg); }
+
+/* ═══ SUBSYSTEMS ═════════════════════════════════════════ */
+.subsys-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:2.5rem; }
+@media(max-width:700px) { .subsys-grid { grid-template-columns:1fr; } }
+.subsys-card {
+  background:var(--bg); border:1px solid var(--border);
+  padding:1.75rem 1.5rem; border-radius:10px;
+  position:relative; overflow:hidden;
+}
+.subsys-card::after {
+  content:attr(data-n); position:absolute; right:1rem; top:.5rem;
+  font-family:var(--serif); font-size:4rem; font-weight:400;
+  color:var(--border); line-height:1; pointer-events:none;
+}
+.subsys-card h3 { font-size:.95rem; margin-bottom:.5rem; }
+.stag {
+  display:inline-block; font-family:var(--mono); font-size:.58rem;
+  padding:.2rem .55rem; border-radius:4px; margin-bottom:1rem;
+}
+.subsys-card ul { list-style:none; font-size:.8rem; color:var(--text2); }
+.subsys-card ul li { padding:.28rem 0; border-bottom:1px solid var(--border); }
+.subsys-card ul li:last-child { border-bottom:none; }
+.subsys-card ul li::before { content:'→ '; color:var(--text3); }
+
+/* ═══ DATABASE ═══════════════════════════════════════════ */
+.db-wrap { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:2.5rem; }
+@media(max-width:700px) { .db-wrap { grid-template-columns:1fr; } }
+.db-table { background:var(--bg); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:12px; }
+.db-head {
+  background:var(--bg2); border-bottom:1px solid var(--border);
+  padding:.75rem 1.25rem; font-family:var(--mono); font-size:.62rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--text2);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.db-head span { color:var(--text3); font-weight:400; text-transform:none; letter-spacing:0; }
+.db-row { display:flex; align-items:center; gap:.75rem; padding:.6rem 1.25rem; border-bottom:1px solid var(--border); font-size:.8rem; }
+.db-row:last-child { border-bottom:none; }
+.db-pk { font-family:var(--mono); font-size:.52rem; padding:.12rem .4rem; border-radius:4px; background:var(--amber-bg); color:var(--amber); border:1px solid rgba(217,119,6,.25); flex-shrink:0; }
+.db-name { font-family:var(--mono); font-size:.7rem; color:var(--text); min-width:130px; }
+.db-name.ind { padding-left:1.4rem; color:var(--text2); }
+.db-type { font-size:.68rem; color:var(--blue); min-width:55px; }
+.db-desc { font-size:.72rem; color:var(--text3); }
+.rls-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:1.5rem; }
+@media(max-width:640px) { .rls-grid { grid-template-columns:1fr; } }
+.rls-card { background:var(--bg2); border:1px solid var(--border); padding:1.25rem; border-radius:10px; }
+.rls-tag { font-family:var(--mono); font-size:.6rem; color:var(--blue); margin-bottom:.5rem; letter-spacing:.07em; text-transform:uppercase; }
+.rls-card p { font-size:.8rem; color:var(--text2); line-height:1.65; }
+
+/* ═══ AUTH / ROLES ═══════════════════════════════════════ */
+.auth-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:2.5rem; }
+@media(max-width:700px) { .auth-grid { grid-template-columns:1fr; } }
+.auth-card {
+  background:var(--bg); border:1px solid var(--border);
+  border-top:2px solid var(--acc, var(--green));
+  padding:1.75rem 1.5rem; border-radius:10px;
+}
+.auth-card h3 { font-size:.9rem; color:var(--acc, var(--green)); margin-bottom:.5rem; }
+.auth-card p  { font-size:.82rem; color:var(--text2); line-height:1.65; margin-bottom:.75rem; }
+.endpoint {
+  font-family:var(--mono); font-size:.62rem;
+  background:var(--bg2); border:1px solid var(--border);
+  color:var(--text2); padding:.35rem .75rem; border-radius:6px; display:inline-block;
+}
+.roles-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:1.5rem; }
+@media(max-width:700px) { .roles-grid { grid-template-columns:1fr; } }
+.role-card {
+  background:var(--bg); border:1px solid var(--border);
+  border-top:2px solid var(--acc, var(--green));
+  padding:1.75rem 1.5rem; border-radius:10px;
+}
+.role-card h3 { font-size:1rem; color:var(--acc, var(--green)); margin-bottom:1.25rem; }
+.rf { display:flex; gap:.75rem; margin-bottom:1rem; }
+.rf-icon { font-size:1rem; flex-shrink:0; margin-top:.1rem; }
+.rf-text h4 { font-size:.86rem; font-weight:600; margin-bottom:.2rem; }
+.rf-text p  { font-size:.77rem; color:var(--text2); line-height:1.55; }
+
+/* ═══ DATASET ════════════════════════════════════════════ */
+.ds-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1.5rem; }
+.ds-stat { background:var(--bg); border:1px solid var(--border); padding:1.25rem; border-radius:10px; text-align:center; }
+.ds-stat .v { font-family:var(--serif); font-size:2rem; font-weight:400; color:var(--text); letter-spacing:-.04em; }
+.ds-stat .l { font-size:.73rem; color:var(--text3); margin-top:.25rem; }
+.bar-row { margin-bottom:.9rem; }
+.bar-lbl { display:flex; justify-content:space-between; font-size:.78rem; margin-bottom:.3rem; color:var(--text2); }
+.bar-lbl span { font-family:var(--mono); font-size:.65rem; }
+.bar-track { height:6px; background:var(--bg3); border-radius:100px; overflow:hidden; }
+.bar-fill  { height:100%; border-radius:100px; transition:width 1.1s ease; }
+
+/* ═══ MODEL ══════════════════════════════════════════════ */
+.model-pipe { display:flex; gap:12px; margin-top:2.5rem; flex-wrap:wrap; }
+.mp {
+  flex:1; min-width:110px;
+  background:var(--bg); border:1px solid var(--border);
+  border-top:2px solid var(--acc, var(--green));
+  padding:1.25rem 1rem; border-radius:10px;
+  text-align:center; transition:transform .15s;
+}
+.mp:hover { transform:translateY(-3px); }
+.mp .ico { font-size:1.4rem; margin-bottom:.5rem; }
+.mp h3 { font-size:.8rem; margin-bottom:.4rem; }
+.mp p  { font-size:.72rem; color:var(--text2); line-height:1.5; }
+.dec-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:2.5rem; }
+@media(max-width:640px) { .dec-grid { grid-template-columns:1fr; } }
+.dec-card {
+  background:var(--bg); border:1px solid var(--border);
+  border-left:2px solid var(--acc, var(--green));
+  padding:1.4rem 1.5rem; border-radius:10px;
+}
+.dec-card h3 { font-size:.88rem; color:var(--acc, var(--green)); margin-bottom:.4rem; }
+.dec-card p  { font-size:.8rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ RESULTS ════════════════════════════════════════════ */
+.results-hero {
+  display:grid; grid-template-columns:auto 1fr; gap:2.5rem;
+  align-items:center; margin-top:2.5rem;
+  background:var(--bg); border:1px solid var(--border);
+  border-left:3px solid var(--green); padding:2.25rem; border-radius:10px;
+}
+@media(max-width:640px) { .results-hero { grid-template-columns:1fr; } }
+.big-acc { font-family:var(--serif); font-size:5.5rem; font-weight:400; color:var(--green); letter-spacing:-.05em; line-height:1; }
+.big-lbl { font-size:.82rem; color:var(--text3); margin-top:.3rem; }
+.rd h3 { font-size:.95rem; margin-bottom:.5rem; }
+.rd p  { font-size:.84rem; color:var(--text2); margin-bottom:.4rem; line-height:1.65; }
+.emo-table { margin-top:2.5rem; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.emo-table table { width:100%; border-collapse:collapse; }
+.emo-table th { font-family:var(--mono); font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text3); padding:.8rem 1.25rem; text-align:left; background:var(--bg2); border-bottom:1px solid var(--border); }
+.emo-table td { padding:.85rem 1.25rem; font-size:.85rem; border-bottom:1px solid var(--border); color:var(--text2); }
+.emo-table tr:last-child td { border-bottom:none; }
+.emo-table tr:hover td { background:var(--bg2); }
+.em-dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:.5rem; }
+.acc-val { font-family:var(--mono); font-weight:700; }
+.note-cell { font-size:.72rem; color:var(--text3); font-style:italic; }
+.sota-row { display:grid; grid-template-columns:200px 1fr 60px; align-items:center; gap:1rem; margin-bottom:.65rem; }
+@media(max-width:600px) { .sota-row { grid-template-columns:110px 1fr 48px; } }
+.sota-name { font-size:.79rem; color:var(--text2); }
+.sota-name.ours { color:var(--text); font-weight:600; }
+.sota-track { height:7px; background:var(--bg3); border-radius:100px; overflow:hidden; }
+.sota-fill  { height:100%; border-radius:100px; transition:width 1.2s ease; }
+.sota-acc   { font-family:var(--mono); font-size:.72rem; color:var(--text3); text-align:right; }
+.sota-acc.ours { color:var(--green); font-weight:700; }
+
+/* ═══ HOW IT WORKS ═══════════════════════════════════════ */
+.hiw-flow { display:flex; flex-direction:column; gap:0; margin-top:2.5rem; }
+.hiw-step { display:grid; grid-template-columns:70px 28px 1fr; align-items:stretch; min-height:110px; }
+.hiw-icon {
+  width:48px; height:48px; border-radius:50%; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center; font-size:1.25rem;
+  flex-shrink:0; align-self:flex-start; margin-top:1.25rem;
+  background:var(--bg2);
+}
+.hiw-conn { width:2px; background:var(--border); margin:0 auto; position:relative; }
+.hiw-conn::after { content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); width:7px; height:7px; border-right:1.5px solid var(--text3); border-bottom:1.5px solid var(--text3); rotate:45deg; }
+.hiw-conn.last { background:transparent; }
+.hiw-conn.last::after { display:none; }
+.hiw-body {
+  background:var(--bg); border:1px solid var(--border);
+  border-top:2px solid var(--acc, var(--green));
+  padding:1.1rem 1.4rem; border-radius:10px;
+  margin:.65rem 0; transition:transform .15s;
+}
+.hiw-body:hover { transform:translateX(4px); }
+.hiw-num { font-family:var(--mono); font-size:.6rem; color:var(--acc, var(--green)); margin-bottom:.35rem; letter-spacing:.08em; }
+.hiw-body h3 { font-size:.9rem; margin-bottom:.35rem; }
+.hiw-body p  { font-size:.8rem; color:var(--text2); line-height:1.65; margin-bottom:.65rem; }
+.code-line {
+  font-family:var(--mono); font-size:.62rem; color:var(--text2);
+  background:var(--bg2); border:1px solid var(--border);
+  padding:.35rem .7rem; border-radius:5px; overflow-x:auto; white-space:nowrap;
+}
+
+/* ═══ RAG ════════════════════════════════════════════════ */
+.rag-layout { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2.5rem; }
+@media(max-width:700px) { .rag-layout { grid-template-columns:1fr; } }
+.rag-col-title { font-family:var(--mono); font-size:.6rem; color:var(--text3); letter-spacing:.1em; text-transform:uppercase; margin-bottom:1.25rem; }
+.rag-step { display:flex; gap:.85rem; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.rag-step:last-child { border-bottom:none; margin-bottom:0; }
+.rag-icon { font-size:1.1rem; flex-shrink:0; line-height:1.5; }
+.rag-step h3 { font-size:.86rem; margin-bottom:.2rem; }
+.rag-step p  { font-size:.77rem; color:var(--text2); line-height:1.55; }
+.nb-cell { display:flex; gap:.8rem; padding:.75rem 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+.nb-cell:last-child { border-bottom:none; }
+.nb-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); flex-shrink:0; margin-top:.45rem; }
+.nb-cell h3 { font-size:.84rem; margin-bottom:.15rem; }
+.nb-cell p  { font-size:.76rem; color:var(--text2); }
+
+/* ═══ WEBAPP ═════════════════════════════════════════════ */
+.flow-steps { display:flex; gap:0; margin-top:2rem; flex-wrap:wrap; }
+.flow-step {
+  flex:1; min-width:130px; background:var(--bg2);
+  border:1px solid var(--border); border-right:none;
+  padding:.9rem 1.25rem; font-size:.79rem; color:var(--text2);
+}
+.flow-step:first-child { border-radius:10px 0 0 10px; }
+.flow-step:last-child  { border-right:1px solid var(--border); border-radius:0 10px 10px 0; }
+.flow-step strong { display:block; font-family:var(--mono); font-size:.58rem; color:var(--text3); letter-spacing:.07em; margin-bottom:.3rem; text-transform:uppercase; }
+.wf-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2rem; }
+@media(max-width:768px) { .wf-grid { grid-template-columns:1fr 1fr; } }
+.wf-card { background:var(--bg); border:1px solid var(--border); padding:1.4rem 1.5rem; border-radius:10px; transition:transform .15s; }
+.wf-card:hover { transform:translateY(-3px); }
+.wf-icon { font-size:1.4rem; margin-bottom:.55rem; }
+.wf-card h3 { font-size:.88rem; margin-bottom:.35rem; }
+.wf-card p  { font-size:.78rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ PIPELINE STEPS ═════════════════════════════════════ */
+.ps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2.5rem; }
+@media(max-width:700px) { .ps-grid { grid-template-columns:1fr 1fr; } }
+.ps-card { background:var(--bg); border:1px solid var(--border); padding:1.5rem 1.4rem; border-radius:10px; transition:transform .15s; }
+.ps-card:hover { transform:translateY(-3px); }
+.ps-num {
+  width:30px; height:30px; border-radius:50%; background:var(--text);
+  color:var(--bg); font-family:var(--mono); font-size:.65rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center; margin-bottom:.8rem;
+}
+.ps-card h3 { font-size:.88rem; margin-bottom:.4rem; }
+.ps-card p  { font-size:.78rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ CHALLENGES ═════════════════════════════════════════ */
+.ch-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:2.5rem; }
+@media(max-width:640px) { .ch-grid { grid-template-columns:1fr; } }
+.ch-card { background:var(--bg); border:1px solid var(--border); padding:1.6rem 1.5rem; border-radius:10px; }
+.ch-prob { font-size:.82rem; font-weight:600; color:var(--red); margin-bottom:.45rem; display:flex; align-items:center; gap:.4rem; }
+.ch-detail { font-size:.79rem; color:var(--text2); margin-bottom:.9rem; line-height:1.65; }
+.ch-sol { font-size:.79rem; color:var(--green); padding-top:.9rem; border-top:1px solid var(--border); line-height:1.65; }
+.ch-sol::before { content:'✓ '; font-weight:700; }
+
+/* ═══ TECH STACK ═════════════════════════════════════════ */
+.tg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2.5rem; }
+@media(max-width:768px) { .tg-grid { grid-template-columns:1fr 1fr; } }
+.tg-card { background:var(--bg); border:1px solid var(--border); border-top:2px solid var(--acc, var(--green)); padding:1.5rem; border-radius:10px; }
+.tg-title { font-family:var(--mono); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--acc, var(--green)); margin-bottom:1rem; }
+.ti { display:flex; align-items:flex-start; gap:.6rem; padding:.38rem 0; border-bottom:1px solid var(--border); font-size:.79rem; }
+.ti:last-child { border-bottom:none; }
+.ti .tin  { color:var(--text); font-weight:500; flex-shrink:0; min-width:110px; }
+.ti .tdsc { color:var(--text3); font-size:.72rem; line-height:1.4; }
+
+/* ═══ FUTURE ═════════════════════════════════════════════ */
+.fut-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2.5rem; }
+@media(max-width:768px) { .fut-grid { grid-template-columns:1fr; } }
+.fut-col { background:var(--bg); border:1px solid var(--border); padding:1.75rem 1.5rem; border-radius:10px; }
+.fut-phase { font-family:var(--mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--acc, var(--text3)); margin-bottom:1.4rem; padding-bottom:1.4rem; border-bottom:1px solid var(--border); }
+.fut-item { margin-bottom:1.1rem; }
+.fut-item h3 { font-size:.87rem; margin-bottom:.3rem; display:flex; align-items:center; gap:.4rem; }
+.fut-item h3::before { content:'→'; color:var(--acc, var(--text3)); font-style:normal; }
+.fut-item p { font-size:.78rem; color:var(--text2); line-height:1.6; }
+
+/* ═══ CONCLUSION ═════════════════════════════════════════ */
+#conclusion { text-align:center; padding:7rem 2rem; max-width:900px; margin:0 auto; }
+#conclusion h2 { font-size:clamp(2rem,5vw,3.5rem); margin-bottom:1.5rem; }
+.quote {
+  font-family:var(--serif); font-style:italic;
+  font-size:1.2rem; color:var(--text); margin:2.5rem auto;
+  max-width:54ch; line-height:1.75; padding:1.5rem 2rem;
+  border:1px solid var(--border); border-radius:10px;
+  background:var(--bg2);
+}
+.ca-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:2.5rem 0; text-align:left; }
+@media(max-width:600px) { .ca-grid { grid-template-columns:1fr; } }
+.ca-card { background:var(--bg); border:1px solid var(--border); padding:1.5rem; border-radius:10px; }
+.ca-val { font-family:var(--serif); font-size:2rem; font-weight:400; color:var(--green); letter-spacing:-.04em; line-height:1; margin-bottom:.3rem; }
+.ca-card h3 { font-size:.88rem; margin-bottom:.35rem; }
+.ca-card p  { font-size:.8rem; color:var(--text2); }
+.kku { font-family:var(--mono); font-size:.65rem; color:var(--text3); letter-spacing:.1em; margin-top:1rem; }
+
+/* ═══ LAUNCH ═════════════════════════════════════════════ */
+.launch-wrap {
+  position:relative; z-index:1; padding:5rem 2rem 6rem;
+  display:flex; justify-content:center; align-items:center;
+  border-top:1px solid var(--border);
+  background:var(--bg2);
+}
+.launch-inner { display:flex; flex-direction:column; align-items:center; gap:1.25rem; }
+.launch-lbl { font-family:var(--mono); font-size:.65rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text3); }
+.launch-btn {
+  display:flex; align-items:center; gap:1rem; padding:1rem 2rem;
+  background:var(--text); color:var(--bg); text-decoration:none;
+  border-radius:10px; font-family:var(--sans); font-weight:700; font-size:1rem;
+  position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s;
+}
+.launch-btn:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.2); }
+[data-theme="dark"] .launch-btn:hover { box-shadow:0 12px 40px rgba(255,255,255,.08); }
+.launch-btn::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+  transform:translateX(-100%); transition:transform .5s;
+}
+.launch-btn:hover::before { transform:translateX(100%); }
+.ldot { width:8px; height:8px; border-radius:50%; background:var(--bg); flex-shrink:0; animation:pdot 1.8s ease-in-out infinite; }
+@keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+.lurl { font-family:var(--mono); font-size:.65rem; background:rgba(255,255,255,.12); padding:.18rem .5rem; border-radius:4px; }
+.launch-hint { font-size:.78rem; color:var(--text3); }
+.launch-hint code { font-family:var(--mono); font-size:.7rem; background:var(--bg3); border:1px solid var(--border); padding:.1rem .4rem; border-radius:4px; }
+
+/* ═══ FOOTER ═════════════════════════════════════════════ */
+footer { border-top:1px solid var(--border); padding:1.75rem 2rem; text-align:center; font-family:var(--mono); font-size:.6rem; color:var(--text3); position:relative; z-index:1; }
+
+/* ═══ METRICS ROW ════════════════════════════════════════ */
+.mets { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:2rem; }
+@media(max-width:768px) { .mets { grid-template-columns:1fr 1fr; } }
+.met { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:1.25rem 1.4rem; }
+.met-l { font-family:var(--mono); font-size:.58rem; font-weight:500; color:var(--text3); letter-spacing:.05em; text-transform:uppercase; margin-bottom:.7rem; }
+.met-v { font-family:var(--serif); font-size:2.5rem; font-weight:400; letter-spacing:-.05em; line-height:1; }
+.met-d { font-size:.72rem; color:var(--text3); margin-top:.4rem; }
+
+
+/* ═══ HEATMAP STYLES ═════════════════════════════════════ */
+.hm-tab {
+  padding:5px 14px; font-size:12px; font-weight:500; font-family:var(--sans);
+  border-radius:7px; border:1px solid var(--border); cursor:pointer;
+  background:transparent; color:var(--text2); transition:all .12s;
+}
+.hm-tab:hover { border-color:var(--border2); color:var(--text); }
+.hm-tab.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+.hm-col-labels { display:flex; padding-left:44px; gap:3px; margin-bottom:5px; }
+.hm-col-labels span { font-family:var(--mono); font-size:9px; color:var(--text3); text-align:center; flex:1; }
+.hm-row { display:flex; align-items:center; gap:3px; margin-bottom:3px; }
+.hm-row-lbl { font-family:var(--mono); font-size:10px; color:var(--text3); width:40px; text-align:right; padding-right:6px; flex-shrink:0; }
+.hm-cell {
+  flex:1; height:26px; border-radius:4px; cursor:pointer;
+  transition:transform .12s, box-shadow .12s; position:relative;
+}
+.hm-cell:hover { transform:scale(1.15); z-index:10; box-shadow:0 2px 8px rgba(0,0,0,.15); }
+
+/* ═══ SCROLL REVEAL ══════════════════════════════════════ */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity .55s ease, transform .55s ease; }
+.reveal.on { opacity:1; transform:none; }
+
+/* ═══ HIW ANIMATION ══════════════════════════════════════ */
+.hiw-step { opacity:0; transform:translateY(16px); transition:opacity .45s ease, transform .45s ease; }
+.hiw-step.fv { opacity:1; transform:none; }
+.hiw-conn { position:relative; overflow:hidden; }
+.hiw-conn::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:2px; height:0%; background:var(--text3); opacity:.4; transition:height .35s ease; }
+.hiw-conn.ld::before { height:100%; }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ══════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <div class="lmark"><svg viewBox="0 0 12 12"><polygon points="6,1 1,6 6,11 11,6"/></svg></div>
+    EduSense
+  </div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#objectives">Objectives</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#database">Database</a></li>
+    <li><a href="#roles">Auth</a></li>
+    <li><a href="#dataset">Dataset</a></li>
+    <li><a href="#model">Model</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#pipeline">Detection</a></li>
+    <li><a href="#rag">RAG</a></li>
+    <li><a href="#webapp">App</a></li>
+    <li><a href="#challenges">Challenges</a></li>
+    <li><a href="#techstack">Stack</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="ttoggle" id="tt">
+      <button class="topt on" onclick="setTheme('light')">☀</button>
+      <button class="topt" onclick="setTheme('dark')">◑</button>
+    </div>
+    <div class="nav-badge">KKU · 2025</div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════ -->
+<div id="hero">
+  <canvas id="cv" style="position:absolute;inset:0;pointer-events:none;z-index:0"></canvas>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">King Khalid University — Final Graduation Project 2025</div>
+    <h1 class="hero-title">
+      <span class="tl" data-text="Intelligent"></span><br>
+      <span class="accent tl" data-text="Classroom" data-delay="400"></span><br>
+      <span class="dim tl" data-text="Engagement" data-delay="850"></span>
+    </h1>
+    <p class="hero-desc">
+      A real-time AI platform detecting student dissatisfaction through facial emotion recognition — now a complete multi-user system with authentication, Supabase persistence, teacher heatmaps, student dashboards, and AI-generated notebooks.
+    </p>
+    <div class="hero-pills">
+      <span class="pill">FER · OpenCV</span>
+      <span class="pill">CLAHE Preprocessing</span>
+      <span class="pill">FAISS · RAG</span>
+      <span class="pill">Whisper</span>
+      <span class="pill">Claude API</span>
+      <span class="pill">Flask · Python</span>
+      <span class="pill">PyTorch · KAN · CORAL</span>
+      <span class="pill new-f">Supabase Auth ★</span>
+      <span class="pill new-f">JWT Roles ★</span>
+      <span class="pill new-f">Teacher Dashboard ★</span>
+      <span class="pill new-f">Class Heatmaps ★</span>
+      <span class="pill new-f">Light / Dark Theme ★</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val g counter" data-t="81.1" data-s="%" data-d="1">81.1%</div><div class="lbl">Model Accuracy</div></div>
+      <div class="hero-stat"><div class="val counter" data-t="6" data-s=" tables">6</div><div class="lbl">Supabase Tables</div></div>
+      <div class="hero-stat"><div class="val counter" data-t="18" data-s="+ routes">18+</div><div class="lbl">API Routes</div></div>
+      <div class="hero-stat"><div class="val counter" data-t="2" data-s=" roles">2</div><div class="lbl">User Roles</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ PROBLEM ═══════════════════════════════════════════ -->
+<section id="problem">
+  <div class="section-tag">The Problem</div>
+  <h2>The Classroom<br><em>Engagement Gap</em></h2>
+  <p class="sub">Why traditional teaching lacks real-time insight into student understanding.</p>
+  <div class="prob-grid reveal">
+    <div class="big-stat">
+      <div class="num">65%</div>
+      <div class="desc">of students experience boredom or confusion during lectures — without the instructor ever knowing.</div>
+      <div class="note">Detected silently, in real time, by EduSense.</div>
+    </div>
+    <div class="prob-card"><div class="icon">👀</div><h3>No Real-Time Feedback</h3><p>Instructors cannot see who is lost in a class of 30+ students. Confusion is invisible and compounds silently.</p></div>
+    <div class="prob-card"><div class="icon">📉</div><h3>Passive Learning</h3><p>Students disengage silently — boredom and confusion build without any intervention or personalised support.</p></div>
+    <div class="prob-card"><div class="icon">📚</div><h3>Generic Study Materials</h3><p>One-size-fits-all notes cannot target each student's specific struggle point in the moment it occurs.</p></div>
+    <div class="prob-card"><div class="icon">⏱️</div><h3>Delayed Intervention</h3><p>By the time a quiz reveals confusion, the lecture is over. EduSense acts within seconds of detection.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ OBJECTIVES ════════════════════════════════════════ -->
+<section id="objectives">
+  <div class="section-tag">Objectives</div>
+  <h2>What EduSense<br><em>Sets Out to Achieve</em></h2>
+  <p class="sub">Six concrete, measurable goals — all delivered in the final system.</p>
+  <div class="obj-grid reveal">
+    <div class="obj-card" style="--acc:var(--green)"><div class="obj-num">01</div><h3>Real-Time Emotion Detection</h3><p>Detect boredom, confusion, and frustration from webcam every 2 seconds with personal baseline calibration.</p></div>
+    <div class="obj-card" style="--acc:var(--blue)"><div class="obj-num">02</div><h3>Personalised Notebooks</h3><p>Auto-generate targeted Jupyter notebooks at the exact moment of struggle using RAG + Claude API.</p></div>
+    <div class="obj-card" style="--acc:var(--amber)"><div class="obj-num">03</div><h3>Multi-User Auth System <span class="new-pill">New</span></h3><p>Separate student and teacher accounts with JWT authentication backed by Supabase Auth.</p></div>
+    <div class="obj-card" style="--acc:var(--red)"><div class="obj-num">04</div><h3>Teacher Analytics <span class="new-pill">New</span></h3><p>Class heatmaps, per-student engagement profiles, struggle topic analysis, and AI teaching insights.</p></div>
+    <div class="obj-card" style="--acc:var(--green)"><div class="obj-num">05</div><h3>Persistent Data Layer <span class="new-pill">New</span></h3><p>All sessions, emotions, struggle moments, and notebooks persisted to Supabase with Row-Level Security.</p></div>
+    <div class="obj-card" style="--acc:var(--blue)"><div class="obj-num">06</div><h3>State-of-the-Art Model</h3><p>EduSenseTransformer + KAN + CORAL ensemble achieves 81.1% on DAISEE, surpassing all published baselines.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ARCHITECTURE ══════════════════════════════════════ -->
+<section id="architecture">
+  <div class="section-tag">System Architecture</div>
+  <h2>Full-Stack Platform —<br><em>Four Integrated Layers</em></h2>
+  <p class="sub">From webcam frame to teacher heatmap — a complete, production-ready system.</p>
+
+  <div class="arch-layers reveal">
+    <div class="arch-layer">
+      <div class="arch-layer-lbl"><div class="al-n">Layer 01</div><h3>Frontend UI</h3></div>
+      <div class="arch-layer-body">
+        <span class="chip g">Landing Page</span><span class="chip g">Auth Pages</span><span class="chip g">Student Dashboard</span><span class="chip g">Teacher Dashboard</span><span class="chip g">Live Monitor</span><span class="chip g">Class Heatmap</span><span class="chip g">Light / Dark Theme</span><span class="chip g">Lecture Modal</span>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="arch-layer-lbl"><div class="al-n">Layer 02</div><h3>Flask API</h3></div>
+      <div class="arch-layer-body">
+        <span class="chip b">/api/auth/signup</span><span class="chip b">/api/auth/login</span><span class="chip b">/api/start-session</span><span class="chip b">/api/analyze-frame</span><span class="chip b">/api/end-session</span><span class="chip b">/api/teacher/*</span><span class="chip b">/api/student/*</span><span class="chip b">/api/subjects/all</span><span class="chip b">/api/reset</span>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="arch-layer-lbl"><div class="al-n">Layer 03</div><h3>AI Pipeline</h3></div>
+      <div class="arch-layer-body">
+        <span class="chip">FER · CLAHE</span><span class="chip">Baseline Calibration</span><span class="chip">D'Mello Formulas</span><span class="chip">7-frame Smoothing</span><span class="chip">Whisper</span><span class="chip">FAISS RAG</span><span class="chip">Claude API</span><span class="chip">yt-dlp</span>
+      </div>
+    </div>
+    <div class="arch-layer">
+      <div class="arch-layer-lbl"><div class="al-n">Layer 04</div><h3>Supabase</h3></div>
+      <div class="arch-layer-body">
+        <span class="chip a">Auth (JWT)</span><span class="chip a">profiles</span><span class="chip a">sessions</span><span class="chip a">subjects</span><span class="chip a">struggle_moments</span><span class="chip a">emotion_history</span><span class="chip a">notebooks</span><span class="chip a">Row-Level Security</span><span class="chip a">Auto-Profile Trigger</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsys-grid reveal" style="margin-top:2.5rem">
+    <div class="subsys-card" data-n="01">
+      <div class="stag" style="background:var(--green-bg);color:var(--green);border:1px solid rgba(22,163,74,.25)">Subsystem 01</div>
+      <h3>Emotion Detection Pipeline</h3>
+      <ul>
+        <li>Webcam → CLAHE Preprocessing</li>
+        <li>FER Library (7-class emotions)</li>
+        <li>Personal Baseline Calibration</li>
+        <li>7-frame Exponential Smoothing</li>
+        <li>D'Mello & Graesser (2012) formulas</li>
+        <li>4 Dissatisfaction Scores + Trigger</li>
+      </ul>
+    </div>
+    <div class="subsys-card" data-n="02">
+      <div class="stag" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(37,99,235,.25)">Subsystem 02</div>
+      <h3>RAG Knowledge System</h3>
+      <ul>
+        <li>PDF Textbooks → PyMuPDF chunks</li>
+        <li>SentenceTransformer Embeddings</li>
+        <li>FAISS Vector Index (384-dim)</li>
+        <li>Top-5 Chunk Retrieval</li>
+        <li>Whisper Audio Transcription</li>
+        <li>60-second context window</li>
+      </ul>
+    </div>
+    <div class="subsys-card" data-n="03">
+      <div class="stag" style="background:var(--amber-bg);color:var(--amber);border:1px solid rgba(217,119,6,.25)">Subsystem 03 — New</div>
+      <h3>Multi-User Platform</h3>
+      <ul>
+        <li>Supabase JWT Authentication</li>
+        <li>Student &amp; Teacher Role Dashboards</li>
+        <li>Per-session Supabase persistence</li>
+        <li>Teacher class heatmap analytics</li>
+        <li>Row-Level Security (RLS)</li>
+        <li>Auto-reset &amp; session recovery</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DATABASE ══════════════════════════════════════════ -->
+<section id="database">
+  <div class="section-tag">Database Design <span class="new-pill">New</span></div>
+  <h2>Supabase PostgreSQL —<br><em>6 Tables, Full RLS</em></h2>
+  <p class="sub">Every session, emotion score, struggle moment, and notebook is persisted. Row-Level Security ensures students only see their own data.</p>
+
+  <div class="db-wrap reveal">
+    <div>
+      <div class="db-table" style="margin-bottom:12px">
+        <div class="db-head">profiles <span>— user identity</span></div>
+        <div class="db-row"><span class="db-pk">PK</span><span class="db-name">id</span><span class="db-type">uuid</span><span class="db-desc">References auth.users</span></div>
+        <div class="db-row"><span class="db-name ind">role</span><span class="db-type">text</span><span class="db-desc">student | teacher</span></div>
+        <div class="db-row"><span class="db-name ind">full_name</span><span class="db-type">text</span><span class="db-desc">Display name</span></div>
+        <div class="db-row"><span class="db-name ind">department</span><span class="db-type">text</span><span class="db-desc">CS, Math, Engineering…</span></div>
+        <div class="db-row"><span class="db-name ind">student_id</span><span class="db-type">text</span><span class="db-desc">University student number</span></div>
+      </div>
+      <div class="db-table" style="margin-bottom:12px">
+        <div class="db-head">sessions <span>— one per lecture watch</span></div>
+        <div class="db-row"><span class="db-pk">PK</span><span class="db-name">id</span><span class="db-type">uuid</span><span class="db-desc">Session identifier</span></div>
+        <div class="db-row"><span class="db-name ind">student_id</span><span class="db-type">uuid</span><span class="db-desc">→ profiles</span></div>
+        <div class="db-row"><span class="db-name ind">teacher_id</span><span class="db-type">uuid</span><span class="db-desc">→ profiles (teacher)</span></div>
+        <div class="db-row"><span class="db-name ind">subject_id</span><span class="db-type">uuid</span><span class="db-desc">→ subjects</span></div>
+        <div class="db-row"><span class="db-name ind">avg_engagement</span><span class="db-type">float</span><span class="db-desc">Final session average 0–1</span></div>
+        <div class="db-row"><span class="db-name ind">focus_rate</span><span class="db-type">float</span><span class="db-desc">% of frames focused</span></div>
+        <div class="db-row"><span class="db-name ind">status</span><span class="db-type">text</span><span class="db-desc">idle|setup|monitoring|done</span></div>
+      </div>
+      <div class="db-table">
+        <div class="db-head">subjects <span>— teacher-owned</span></div>
+        <div class="db-row"><span class="db-pk">PK</span><span class="db-name">id</span><span class="db-type">uuid</span></div>
+        <div class="db-row"><span class="db-name ind">teacher_id</span><span class="db-type">uuid</span><span class="db-desc">→ profiles (teacher)</span></div>
+        <div class="db-row"><span class="db-name ind">name</span><span class="db-type">text</span><span class="db-desc">AI & ML, Algorithms…</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="db-table" style="margin-bottom:12px">
+        <div class="db-head">struggle_moments <span>— trigger events</span></div>
+        <div class="db-row"><span class="db-pk">PK</span><span class="db-name">id</span><span class="db-type">uuid</span></div>
+        <div class="db-row"><span class="db-name ind">session_id</span><span class="db-type">uuid</span><span class="db-desc">→ sessions</span></div>
+        <div class="db-row"><span class="db-name ind">student_id</span><span class="db-type">uuid</span><span class="db-desc">→ profiles</span></div>
+        <div class="db-row"><span class="db-name ind">video_time</span><span class="db-type">float</span><span class="db-desc">Exact video timestamp (s)</span></div>
+        <div class="db-row"><span class="db-name ind">confusion</span><span class="db-type">float</span><span class="db-desc">Score 0.0 – 1.0</span></div>
+        <div class="db-row"><span class="db-name ind">detected</span><span class="db-type">text[]</span><span class="db-desc">['confusion','boredom']</span></div>
+        <div class="db-row"><span class="db-name ind">transcript</span><span class="db-type">text</span><span class="db-desc">Last 60s of lecture</span></div>
+      </div>
+      <div class="db-table" style="margin-bottom:12px">
+        <div class="db-head">emotion_history <span>— sampled every 10 frames</span></div>
+        <div class="db-row"><span class="db-name ind">session_id</span><span class="db-type">uuid</span><span class="db-desc">→ sessions</span></div>
+        <div class="db-row"><span class="db-name ind">engagement</span><span class="db-type">float</span></div>
+        <div class="db-row"><span class="db-name ind">boredom</span><span class="db-type">float</span></div>
+        <div class="db-row"><span class="db-name ind">confusion</span><span class="db-type">float</span></div>
+        <div class="db-row"><span class="db-name ind">frustration</span><span class="db-type">float</span></div>
+        <div class="db-row"><span class="db-name ind">dissatisfied</span><span class="db-type">bool</span><span class="db-desc">True if any emotion triggered</span></div>
+      </div>
+      <div class="db-table">
+        <div class="db-head">notebooks <span>— generated .ipynb files</span></div>
+        <div class="db-row"><span class="db-name ind">session_id</span><span class="db-type">uuid</span></div>
+        <div class="db-row"><span class="db-name ind">student_id</span><span class="db-type">uuid</span></div>
+        <div class="db-row"><span class="db-name ind">filename</span><span class="db-type">text</span><span class="db-desc">Timestamped .ipynb filename</span></div>
+        <div class="db-row"><span class="db-name ind">detected</span><span class="db-type">text[]</span><span class="db-desc">Emotions that triggered it</span></div>
+        <div class="db-row"><span class="db-name ind">status</span><span class="db-type">text</span><span class="db-desc">pending | done | reviewed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rls-grid reveal" style="margin-top:1.5rem">
+    <div class="rls-card"><div class="rls-tag">RLS — Students</div><p>Students read/write only their own sessions, struggle moments, emotion history, and notebooks. Other students' data is invisible at the database level.</p></div>
+    <div class="rls-card"><div class="rls-tag">RLS — Teachers</div><p>Teachers read all sessions and struggle moments where teacher_id = their ID. They cannot access other teachers' class data.</p></div>
+    <div class="rls-card"><div class="rls-tag">Auto-Profile Trigger</div><p>A PostgreSQL trigger automatically creates a profiles row when a user signs up via Supabase Auth. No orphaned users, no race conditions.</p></div>
+    <div class="rls-card"><div class="rls-tag">Service Role vs Anon Key</div><p>Flask uses the service_role key to write emotion data in real time (bypasses RLS). The anon key is used only in the frontend for safe public operations.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ AUTH & ROLES ══════════════════════════════════════ -->
+<section id="roles">
+  <div class="section-tag">Authentication & User System <span class="new-pill">New</span></div>
+  <h2>Two Roles, One Platform —<br><em>JWT Authentication</em></h2>
+  <p class="sub">Students and teachers sign up separately. Each gets a completely different dashboard. Every API call is authenticated via JWT.</p>
+
+  <div class="auth-grid reveal">
+    <div class="auth-card" style="--acc:var(--green)">
+      <h3>POST /api/auth/signup</h3>
+      <p>Creates a Supabase Auth user with role, full_name, department, student_id or faculty_id in user metadata. A PostgreSQL trigger instantly creates the profiles row.</p>
+      <div class="endpoint">sb.auth.sign_up({ email, password, options: { data: { role, full_name, … } } })</div>
+    </div>
+    <div class="auth-card" style="--acc:var(--blue)">
+      <h3>POST /api/auth/login</h3>
+      <p>Returns a JWT access_token + full profile row. Frontend stores token in localStorage (with in-memory fallback for Edge browser). Every request sends Authorization: Bearer &lt;token&gt;.</p>
+      <div class="endpoint">sb.auth.sign_in_with_password({ email, password }) → JWT</div>
+    </div>
+    <div class="auth-card" style="--acc:var(--amber)">
+      <h3>JWT Middleware — get_current_user()</h3>
+      <p>Every protected Flask route validates the JWT via sb.auth.get_user(token). Returns the Supabase user object or None. Returns 401 if token missing or invalid.</p>
+      <div class="endpoint">Authorization: Bearer &lt;token&gt; → sb.auth.get_user(token)</div>
+    </div>
+    <div class="auth-card" style="--acc:var(--red)">
+      <h3>Edge Browser Fallback</h3>
+      <p>A safe storage wrapper falls back to in-memory storage when Edge's tracking prevention blocks localStorage. student_id is also sent in the request body as a JWT-free fallback for start-session.</p>
+      <div class="endpoint">store.get / store.set / store.del — memory fallback on catch</div>
+    </div>
+  </div>
+
+  <div class="roles-grid reveal" style="margin-top:1.5rem">
+    <div class="role-card" style="--acc:var(--green)">
+      <h3>👨‍🎓 Student Dashboard</h3>
+      <div class="rf"><div class="rf-icon">📊</div><div class="rf-text"><h4>Home — Performance Overview</h4><p>Engagement rate, lectures watched, struggle count, notebooks ready — all real Supabase data.</p></div></div>
+      <div class="rf"><div class="rf-icon">▶️</div><div class="rf-text"><h4>Last Lectures</h4><p>Every past session with teacher name, subject, date, and engagement badge.</p></div></div>
+      <div class="rf"><div class="rf-icon">📈</div><div class="rf-text"><h4>Hardest Topics & Progress</h4><p>Difficulty index per subject from real struggle moment data. Per-subject engagement bars.</p></div></div>
+      <div class="rf"><div class="rf-icon">📓</div><div class="rf-text"><h4>My Notebooks</h4><p>All auto-generated notebooks with status (pending/done/reviewed) and download button.</p></div></div>
+      <div class="rf"><div class="rf-icon">💡</div><div class="rf-text"><h4>Personalised Advice</h4><p>Dynamic AI advice from real engagement patterns — confusion peaks, boredom trends, study time recommendations.</p></div></div>
+    </div>
+    <div class="role-card" style="--acc:var(--blue)">
+      <h3>👩‍🏫 Teacher Dashboard</h3>
+      <div class="rf"><div class="rf-icon">🔥</div><div class="rf-text"><h4>Class Heatmap</h4><p>Students × time segments grid coloured by struggle intensity (green→amber→red). Filterable by subject tab.</p></div></div>
+      <div class="rf"><div class="rf-icon">📉</div><div class="rf-text"><h4>Overview & Struggle Analysis</h4><p>Total students, avg engagement, struggle events count, critical students needing intervention.</p></div></div>
+      <div class="rf"><div class="rf-icon">👥</div><div class="rf-text"><h4>Student Profiles</h4><p>Per-student engagement bar, session count, and subjects — all from Supabase queries.</p></div></div>
+      <div class="rf"><div class="rf-icon">💡</div><div class="rf-text"><h4>AI Teaching Insights</h4><p>Dynamically generated recommendations: lecture length, confusion hotspots, critical student alerts.</p></div></div>
+      <div class="rf"><div class="rf-icon">📚</div><div class="rf-text"><h4>Subject Management</h4><p>Teachers own subjects. Students select teacher + subject before each lecture to link emotion data correctly.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DATASET ═══════════════════════════════════════════ -->
+<section id="dataset">
+  <div class="section-tag">Dataset</div>
+  <h2>DAISEE — In-the-Wild<br><em>Engagement Dataset</em></h2>
+  <p class="sub">9,068 video clips of real students watching online lectures. No lab conditions, no actors.</p>
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:2rem;margin-top:2.5rem;align-items:start" class="reveal">
+    <div>
+      <div class="ds-stats">
+        <div class="ds-stat"><div class="v">9,068</div><div class="l">Total clips</div></div>
+        <div class="ds-stat"><div class="v">10s</div><div class="l">Per clip at 10fps</div></div>
+        <div class="ds-stat"><div class="v">112</div><div class="l">Unique subjects</div></div>
+        <div class="ds-stat"><div class="v">4</div><div class="l">Emotion classes</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Subject-Independent Split</div>
+        <div style="margin-top:.75rem">
+          <div style="margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
+            <div style="font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-bottom:.3rem">TRAINING</div>
+            <div style="font-family:var(--serif);font-size:1.6rem;color:var(--green)">6,231 clips</div>
+            <div style="font-size:.78rem;color:var(--text2)">80 subjects — zero overlap with validation</div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-bottom:.3rem">VALIDATION</div>
+            <div style="font-family:var(--serif);font-size:1.6rem;color:var(--green)">1,688 clips</div>
+            <div style="font-size:.78rem;color:var(--text2)">21 subjects — confirmed zero data leakage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Class Distribution (Training)</div>
+      <div class="card-sub">Extreme imbalance — key challenge of the project</div>
+      <div class="bar-row"><div class="bar-lbl"><strong>Engagement</strong><span>2,812 (45%)</span></div><div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--green)"></div></div></div>
+      <div class="bar-row"><div class="bar-lbl"><strong>Boredom</strong><span>2,112 (34%)</span></div><div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--amber)"></div></div></div>
+      <div class="bar-row"><div class="bar-lbl"><strong>Confusion</strong><span>1,085 (17%)</span></div><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--blue)"></div></div></div>
+      <div class="bar-row"><div class="bar-lbl"><strong>Frustration</strong><span>222 (4%)</span></div><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--red)"></div></div></div>
+      <p style="font-size:.76rem;color:var(--text3);margin-top:.75rem;font-style:italic">Extreme imbalance on Frustration and Engagement led to specialist models for both classes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ MODEL ═════════════════════════════════════════════ -->
+<section id="model">
+  <div class="section-tag">Deep Learning Model</div>
+  <h2>EduSenseTransformer —<br><em>A Novel Architecture</em></h2>
+  <p class="sub">Transformer Encoder + KAN + CORAL for ordinal emotion classification — an original research contribution.</p>
+
+  <div class="model-pipe reveal">
+    <div class="mp" style="--acc:var(--text3)"><div class="ico">🎬</div><h3>Input</h3><p>30 frames per clip (10s at 3fps)</p></div>
+    <div class="mp" style="--acc:var(--blue)"><div class="ico">👁️</div><h3>AffectNet-ViT</h3><p>Frozen ViT · 768-dim emotion embeddings</p></div>
+    <div class="mp" style="--acc:var(--blue)"><div class="ico">🧠</div><h3>Transformer Encoder</h3><p>4 layers · 12 heads · CLS token</p></div>
+    <div class="mp" style="--acc:var(--amber)"><div class="ico">〰️</div><h3>KAN Layer</h3><p>B-spline basis · 768→256</p></div>
+    <div class="mp" style="--acc:var(--red)"><div class="ico">🎯</div><h3>CORAL Heads ×4</h3><p>Binary ordinal classifier per emotion</p></div>
+    <div class="mp" style="--acc:var(--green)"><div class="ico">✅</div><h3>Predictions</h3><p>Boredom · Confusion · Frustration · Engagement</p></div>
+  </div>
+
+  <div class="dec-grid reveal">
+    <div class="dec-card" style="--acc:var(--blue)"><h3>Transformer over LSTM</h3><p>Sees all 30 frames simultaneously using self-attention — LSTM forgets early frames. Largest single accuracy jump in the project.</p></div>
+    <div class="dec-card" style="--acc:var(--amber)"><h3>KAN over MLP</h3><p>B-spline basis functions capture non-linear emotional patterns that standard MLPs miss. Learnable activation per connection.</p></div>
+    <div class="dec-card" style="--acc:var(--red)"><h3>CORAL over Softmax</h3><p>Ordinal classification preserves the natural ordering of engagement levels. Binary classifiers per threshold avoid rank inconsistency.</p></div>
+    <div class="dec-card" style="--acc:var(--green)"><h3>7-Model Ensemble</h3><p>Seven diverse Transformers with different seeds. Averaged probabilities with per-emotion threshold tuning. Final: 81.1%.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RESULTS ════════════════════════════════════════════ -->
+<section id="results">
+  <div class="section-tag">Results</div>
+  <h2>Model Performance —<br><em>81.1% Average Accuracy</em></h2>
+  <p class="sub">Evaluated on 1,688 held-out clips. Zero subject overlap with training set.</p>
+
+  <div class="results-hero reveal">
+    <div><div class="big-acc">81.1%</div><div class="big-lbl">Average Accuracy<br>7-Model Ensemble · 1,688 Clips</div></div>
+    <div class="rd">
+      <h3>Surpasses all published DAISEE baselines</h3>
+      <p>Including the 2024 state-of-the-art general model at 68.6%. EduSense achieves a <strong style="color:var(--green)">+12.5 percentage point improvement</strong> over the previous best.</p>
+      <p>Specialist models deployed for Engagement and Frustration — two classes where the ensemble collapsed to majority-class prediction.</p>
+    </div>
+  </div>
+
+  <div class="emo-table reveal">
+    <table>
+      <thead><tr><th>Emotion</th><th>Accuracy</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><span class="em-dot" style="background:var(--green)"></span>Engagement</td><td class="acc-val" style="color:var(--green)">95.7%</td><td class="note-cell">Specialist model</td></tr>
+        <tr><td><span class="em-dot" style="background:var(--amber)"></span>Boredom</td><td class="acc-val" style="color:var(--amber)">75.9%</td><td class="note-cell">Ensemble — extreme imbalance</td></tr>
+        <tr><td><span class="em-dot" style="background:var(--blue)"></span>Confusion</td><td class="acc-val" style="color:var(--blue)">73.6%</td><td class="note-cell">Ensemble — best minority F1</td></tr>
+        <tr><td><span class="em-dot" style="background:var(--red)"></span>Frustration</td><td class="acc-val" style="color:var(--red)">79.0%</td><td class="note-cell">Specialist model</td></tr>
+        <tr><td><strong>Average</strong></td><td class="acc-val" style="color:var(--green)"><strong>81.1%</strong></td><td class="note-cell">Final ensemble result</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:2rem" class="reveal">
+    <div style="font-size:.88rem;font-weight:600;color:var(--text2);margin-bottom:1.25rem">Comparison with State-of-the-Art (DAISEE Benchmark)</div>
+    <div class="sota-row"><div class="sota-name">LRCN (2016)</div><div class="sota-track"><div class="sota-fill" style="width:57.9%;background:var(--bg4)"></div></div><div class="sota-acc">57.9%</div></div>
+    <div class="sota-row"><div class="sota-name">ResNet+TCN (2021)</div><div class="sota-track"><div class="sota-fill" style="width:63.9%;background:var(--bg4)"></div></div><div class="sota-acc">63.9%</div></div>
+    <div class="sota-row"><div class="sota-name">EfficientNet+LSTM (2022)</div><div class="sota-track"><div class="sota-fill" style="width:67.5%;background:var(--bg4)"></div></div><div class="sota-acc">67.5%</div></div>
+    <div class="sota-row"><div class="sota-name">SVD+CNN+SMOTE (2023)</div><div class="sota-track"><div class="sota-fill" style="width:77.97%;background:var(--bg4)"></div></div><div class="sota-acc">77.97%</div></div>
+    <div class="sota-row"><div class="sota-name">General Model (2024)</div><div class="sota-track"><div class="sota-fill" style="width:68.6%;background:var(--bg4)"></div></div><div class="sota-acc">68.6%</div></div>
+    <div class="sota-row"><div class="sota-name ours">EduSense — Ours ✓</div><div class="sota-track"><div class="sota-fill" style="width:81.1%;background:var(--green)"></div></div><div class="sota-acc ours">81.1%</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DETECTION PIPELINE ════════════════════════════════ -->
+<section id="pipeline">
+  <div class="section-tag">How It Works — Part 1</div>
+  <h2>From Your Face<br><em>to a Trigger Signal</em></h2>
+  <p class="sub">What actually happens every 2 seconds while you watch a lecture.</p>
+  <div class="hiw-flow reveal">
+    <div class="hiw-step"><div class="hiw-icon">📷</div><div class="hiw-conn" style="--acc:var(--blue)"></div><div class="hiw-body" style="--acc:var(--blue);border-top-color:var(--blue)"><div class="hiw-num" style="color:var(--blue)">01</div><h3>Webcam Captures Frame</h3><p>Every 2 seconds the browser draws the webcam feed onto a canvas and encodes it as Base64 JPEG. Sent via POST to /api/analyze-frame.</p><div class="code-line">canvas.toDataURL('image/jpeg', 0.7) → POST /api/analyze-frame</div></div></div>
+    <div class="hiw-step"><div class="hiw-icon">🌓</div><div class="hiw-conn" style="--acc:var(--green)"></div><div class="hiw-body" style="--acc:var(--green);border-top-color:var(--green)"><div class="hiw-num" style="color:var(--green)">02</div><h3>CLAHE Preprocessing</h3><p>OpenCV converts to LAB color space and applies Contrast Limited Adaptive Histogram Equalization — robust to dim rooms and bright windows.</p><div class="code-line">BGR → LAB → CLAHE(clipLimit=2.5, tileGrid=4×4) → BGR</div></div></div>
+    <div class="hiw-step"><div class="hiw-icon">😐</div><div class="hiw-conn" style="--acc:var(--amber)"></div><div class="hiw-body" style="--acc:var(--amber);border-top-color:var(--amber)"><div class="hiw-num" style="color:var(--amber)">03</div><h3>FER — 7 Raw Emotions</h3><p>FER library detects the largest face and returns 7 raw scores: happy, neutral, fear, surprise, angry, disgust, sad. Normalized to sum=1. Rejected if total confidence &lt; 0.3.</p><div class="code-line">FER → {happy, neutral, fear, surprise, angry, disgust, sad} / total</div></div></div>
+    <div class="hiw-step"><div class="hiw-icon">🎯</div><div class="hiw-conn"></div><div class="hiw-body" style="--acc:var(--amber);border-top-color:var(--amber)"><div class="hiw-num" style="color:var(--amber)">04</div><h3>Personal Baseline Calibration</h3><p>First 30 frames build a personal neutral/happy baseline for this specific student. A naturally serious face won't falsely trigger boredom.</p><div class="code-line">baseline_neutral = mean(neutral[0:30]) · neutral_adj = n − baseline × 0.6</div></div></div>
+    <div class="hiw-step"><div class="hiw-icon">🧮</div><div class="hiw-conn"></div><div class="hiw-body" style="--acc:var(--red);border-top-color:var(--red)"><div class="hiw-num" style="color:var(--red)">05</div><h3>D'Mello Formula Mapping</h3><p>Raw FER scores mapped to 4 learning states. Confusion uses multiplicative synergy — fear AND surprise must both be elevated simultaneously to trigger.</p><div class="code-line">confusion = (fear × surprise × 6.0) + fear×0.25 + surprise×0.20</div></div></div>
+    <div class="hiw-step"><div class="hiw-icon">⚡</div><div class="hiw-conn last"></div><div class="hiw-body" style="--acc:var(--green);border-top-color:var(--green)"><div class="hiw-num" style="color:var(--green)">06</div><h3>Trigger + Supabase Persist</h3><p>7-frame exponential sliding window smooths predictions. Trigger fires at count ≥ 2 with a 60-second cooldown. Struggle moment written immediately to Supabase with video timestamp, emotions, and transcript.</p><div class="code-line">trigger_count ≥ 2 AND now − last_trigger > 60s → sb.table('struggle_moments').insert(…)</div></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RAG ════════════════════════════════════════════════ -->
+<section id="rag">
+  <div class="section-tag">How It Works — Part 2</div>
+  <h2>From a Trigger<br><em>to a Notebook in Seconds</em></h2>
+  <p class="sub">What happens the moment EduSense decides a student is struggling.</p>
+  <div class="rag-layout reveal">
+    <div>
+      <div class="rag-col-title">Knowledge Pipeline</div>
+      <div class="rag-step"><div class="rag-icon">📄</div><div><h3>PDF Upload</h3><p>Professor uploads lecture textbooks. PyMuPDF extracts and chunks paragraphs longer than 50 characters.</p></div></div>
+      <div class="rag-step"><div class="rag-icon">🔢</div><div><h3>Embedding</h3><p>SentenceTransformer (all-MiniLM-L6-v2) converts each chunk to a 384-dim vector, normalized for cosine similarity.</p></div></div>
+      <div class="rag-step"><div class="rag-icon">🗄️</div><div><h3>FAISS Index</h3><p>IndexFlatIP stores embeddings on disk. No ChromaDB — works on Python 3.13 with zero version conflicts.</p></div></div>
+      <div class="rag-step"><div class="rag-icon">🎤</div><div><h3>Whisper Transcription</h3><p>Lecture audio downloaded via yt-dlp in a background thread. Last 60 seconds used as retrieval context at trigger time.</p></div></div>
+      <div class="rag-step"><div class="rag-icon">🤖</div><div><h3>Claude API Generation</h3><p>Transcript + top-5 textbook chunks + detected emotion → claude-sonnet-4 → strict JSON → .ipynb served instantly.</p></div></div>
+    </div>
+    <div>
+      <div class="rag-col-title">Generated Notebook Structure</div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>📚 Title Cell</h3><p>Auto-generated topic title + "Why this notebook?" based on detected emotion type</p></div></div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>💡 Explanation</h3><p>3–4 sentence plain-English breakdown + real-world analogy for the confused concept</p></div></div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>🎯 Key Points</h3><p>3 bullet points distilled from transcript + textbook content</p></div></div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>💻 Code Examples</h3><p>2 complete runnable Python examples with expected output</p></div></div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>🏋️ Practice Exercises</h3><p>Questions with hints + collapsible solution cells</p></div></div>
+      <div class="nb-cell"><div class="nb-dot"></div><div><h3>📖 Further Reading</h3><p>Pointer to relevant textbook chapter for deeper study</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WEB APP ════════════════════════════════════════════ -->
+<section id="webapp">
+  <div class="section-tag">Web Application</div>
+  <h2>EduSense Flask App —<br><em>Complete Multi-User Platform</em></h2>
+  <p class="sub">Landing page → auth → dashboards → live monitoring → notebooks → teacher analytics. One seamless flow.</p>
+
+  <div class="flow-steps reveal">
+    <div class="flow-step"><strong>Step 01</strong>Sign up (Student or Teacher)</div>
+    <div class="flow-step"><strong>Step 02</strong>Select Teacher + Subject</div>
+    <div class="flow-step"><strong>Step 03</strong>Paste YouTube URL → Start</div>
+    <div class="flow-step"><strong>Step 04</strong>Webcam monitors emotions live</div>
+    <div class="flow-step"><strong>Step 05</strong>Download Auto-Notebook</div>
+    <div class="flow-step"><strong>Step 06</strong>Teacher sees class heatmap</div>
+  </div>
+
+  <div class="wf-grid reveal">
+    <div class="wf-card"><div class="wf-icon">🏠</div><h3>Landing Page <span class="new-pill">New</span></h3><p>Professional landing page with hero, three feature cards, and CTAs routing to student or teacher signup.</p></div>
+    <div class="wf-card"><div class="wf-icon">🔐</div><h3>Auth System <span class="new-pill">New</span></h3><p>Role-segmented login/signup — Student ID vs Faculty ID fields. JWT stored in localStorage with memory fallback.</p></div>
+    <div class="wf-card"><div class="wf-icon">☀ / ◑</div><h3>Light & Dark Theme <span class="new-pill">New</span></h3><p>Full light/dark mode toggle in the nav. All charts, heatmaps, and UI elements adapt instantly. Preference saved.</p></div>
+    <div class="wf-card"><div class="wf-icon">📺</div><h3>YouTube Integration</h3><p>Lecture video embeds via YouTube iFrame. Webcam frames captured every 2 seconds and sent to Flask for analysis.</p></div>
+    <div class="wf-card"><div class="wf-icon">🎥</div><h3>Live Webcam Monitor</h3><p>Real-time CLAHE → FER → smoothed emotion bars, trigger dots, engagement chart, and struggle alert panel.</p></div>
+    <div class="wf-card"><div class="wf-icon">🔥</div><h3>Teacher Heatmap <span class="new-pill">New</span></h3><p>Students × time segments grid coloured by struggle intensity. Subject filter tabs. Built from real Supabase data.</p></div>
+    <div class="wf-card"><div class="wf-icon">📊</div><h3>Student Analytics <span class="new-pill">New</span></h3><p>Hardest Topics difficulty index, progress per subject, session history, personalised advice — all from Supabase.</p></div>
+    <div class="wf-card"><div class="wf-icon">⚡</div><h3>Auto-Trigger + Cooldown</h3><p>2 consecutive dissatisfied detections → notebook generation starts. 60-second cooldown prevents rapid-fire triggering.</p></div>
+    <div class="wf-card"><div class="wf-icon">📓</div><h3>Notebook Delivery</h3><p>Generated .ipynb served for download, linked to exact video timestamp, persisted to Supabase notebooks table.</p></div>
+  </div>
+
+  <!-- HEATMAP DEMO -->
+  <div class="card reveal" style="margin-top:2rem">
+    <div class="card-title">Teacher Class Heatmap — Interactive Preview <span class="new-pill">New</span></div>
+    <div class="card-sub">Each row = student · Each column = 5-min lecture segment · Colour = struggle intensity · Hover any cell for details</div>
+
+    <div style="display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap" id="hm-tabs">
+      <button class="hm-tab on" onclick="switchHmTab(this,'ai')">AI &amp; Machine Learning</button>
+      <button class="hm-tab" onclick="switchHmTab(this,'ds')">Distributed Systems</button>
+      <button class="hm-tab" onclick="switchHmTab(this,'algo')">Algorithms</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px">
+      <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">Low struggle</span>
+      <div style="display:flex;gap:2px">
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(22,163,74,.15)"></div>
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(22,163,74,.4)"></div>
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(217,119,6,.35)"></div>
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(217,119,6,.65)"></div>
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(220,38,38,.5)"></div>
+        <div style="width:18px;height:12px;border-radius:3px;background:rgba(220,38,38,.85)"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3)">High struggle</span>
+      <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-left:auto">20 students · 10 segments</span>
+    </div>
+
+    <div style="overflow-x:auto"><div style="min-width:560px" id="hm-wrap"></div></div>
+    <div id="hm-tip" style="display:none;margin-top:10px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:.8rem;color:var(--text2)"></div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+      <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.5rem;color:var(--red)" id="hm-crit">—</div><div style="font-size:.7rem;color:var(--text3);margin-top:2px">Critical students</div></div>
+      <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.5rem;color:var(--amber)" id="hm-hot">—</div><div style="font-size:.7rem;color:var(--text3);margin-top:2px">Hottest segment</div></div>
+      <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.5rem;color:var(--green)" id="hm-eng">—</div><div style="font-size:.7rem;color:var(--text3);margin-top:2px">Avg engagement</div></div>
+      <div style="text-align:center"><div style="font-family:var(--serif);font-size:1.5rem;color:var(--text)" id="hm-tot">—</div><div style="font-size:.7rem;color:var(--text3);margin-top:2px">Struggle events</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CHALLENGES ════════════════════════════════════════ -->
+<section id="challenges">
+  <div class="section-tag">Challenges & Solutions</div>
+  <h2>Every Obstacle Made<br><em>the System Stronger</em></h2>
+  <p class="sub">Key technical challenges encountered and the engineering decisions that solved them.</p>
+  <div class="ch-grid reveal">
+    <div class="ch-card"><div class="ch-prob">⚠ FER False Positives</div><div class="ch-detail">Naturally serious faces triggered false boredom alerts constantly. Threshold-only detection was unreliable across different students.</div><div class="ch-sol">Personal baseline calibration from first 30 frames adjusts each student's threshold individually. Eliminated false alarms by ~70%.</div></div>
+    <div class="ch-card"><div class="ch-prob">⚠ DAISEE Class Imbalance</div><div class="ch-detail">Frustration had only 222 training clips (4%). Standard ensemble collapsed to predicting the majority class — 0% Frustration recall.</div><div class="ch-sol">Dedicated specialist models for Frustration and Engagement. Custom per-class loss weighting. Separate threshold tuning per emotion.</div></div>
+    <div class="ch-card"><div class="ch-prob">⚠ Python 3.13 Compatibility</div><div class="ch-detail">ChromaDB and many vector store libraries all failed on Python 3.13 — unusable on the target machine.</div><div class="ch-sol">Switched to FAISS IndexFlatIP with manual numpy persistence. Zero external vector DB dependency. Works on any Python 3.11+.</div></div>
+    <div class="ch-card"><div class="ch-prob">⚠ Edge Browser localStorage Blocking</div><div class="ch-detail">Edge's tracking prevention silently blocked localStorage, so auth tokens were never saved — every API call returned "Unauthorized".</div><div class="ch-sol">Built a safe storage wrapper that falls back to in-memory storage. Also added student_id in the request body as a JWT-free fallback.</div></div>
+    <div class="ch-card"><div class="ch-prob">⚠ Session Already Active</div><div class="ch-detail">If a student closed the browser without ending a session, Flask's in-memory session dict stayed active=True, blocking all new sessions.</div><div class="ch-sol">Auto-reset logic in start-session: if active=True, force-reset before creating the new session. No user action required.</div></div>
+    <div class="ch-card"><div class="ch-prob">⚠ Supabase Profile Missing</div><div class="ch-detail">Email confirmation enabled during testing caused Supabase auth trigger to miss creating the profiles row for early test accounts.</div><div class="ch-sol">Disabled email confirmation. Added ON CONFLICT DO NOTHING to the trigger. Manual SQL insert for existing test accounts.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ TECH STACK ═════════════════════════════════════════ -->
+<section id="techstack">
+  <div class="section-tag">Tech Stack</div>
+  <h2>35+ Technologies —<br><em>A Production System</em></h2>
+  <p class="sub">Every tool chosen deliberately for compatibility, performance, and reliability.</p>
+  <div class="tg-grid reveal">
+    <div class="tg-card" style="--acc:var(--green)">
+      <div class="tg-title">AI & Emotion</div>
+      <div class="ti"><span class="tin">FER</span><span class="tdsc">7-class facial emotion recognition from webcam frames</span></div>
+      <div class="ti"><span class="tin">OpenCV</span><span class="tdsc">CLAHE preprocessing, frame decode, color space conversion</span></div>
+      <div class="ti"><span class="tin">PyTorch</span><span class="tdsc">EduSenseTransformer training and inference</span></div>
+      <div class="ti"><span class="tin">AffectNet-ViT</span><span class="tdsc">Frozen feature extractor · 768-dim embeddings</span></div>
+      <div class="ti"><span class="tin">KAN</span><span class="tdsc">B-spline learnable activation layer</span></div>
+      <div class="ti"><span class="tin">CORAL</span><span class="tdsc">Ordinal binary classifiers per emotion</span></div>
+    </div>
+    <div class="tg-card" style="--acc:var(--blue)">
+      <div class="tg-title">RAG & Knowledge</div>
+      <div class="ti"><span class="tin">FAISS</span><span class="tdsc">IndexFlatIP vector similarity search</span></div>
+      <div class="ti"><span class="tin">SentenceTransformer</span><span class="tdsc">all-MiniLM-L6-v2 · 384-dim embeddings</span></div>
+      <div class="ti"><span class="tin">Whisper</span><span class="tdsc">'base' model · full lecture transcription</span></div>
+      <div class="ti"><span class="tin">yt-dlp</span><span class="tdsc">YouTube audio extraction to MP3</span></div>
+      <div class="ti"><span class="tin">PyMuPDF</span><span class="tdsc">PDF text extraction and chunking</span></div>
+      <div class="ti"><span class="tin">Claude API</span><span class="tdsc">claude-sonnet-4 · structured JSON → .ipynb</span></div>
+    </div>
+    <div class="tg-card" style="--acc:var(--amber)">
+      <div class="tg-title">Platform & Backend</div>
+      <div class="ti"><span class="tin">Flask</span><span class="tdsc">REST API · threaded · SSL adhoc</span></div>
+      <div class="ti"><span class="tin">Supabase</span><span class="tdsc">PostgreSQL · Auth · Row-Level Security · JWT</span></div>
+      <div class="ti"><span class="tin">Python 3.13</span><span class="tdsc">Latest runtime · all dependencies compatible</span></div>
+      <div class="ti"><span class="tin">Instrument Sans</span><span class="tdsc">UI typography — Instrument Serif for display</span></div>
+      <div class="ti"><span class="tin">Chart.js</span><span class="tdsc">Live emotion charts · engagement timeline</span></div>
+      <div class="ti"><span class="tin">MediaDevices API</span><span class="tdsc">Browser webcam access · canvas capture</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FUTURE ═════════════════════════════════════════════ -->
+<section id="future">
+  <div class="section-tag">Future Work</div>
+  <h2>What Comes<br><em>Next for EduSense</em></h2>
+  <p class="sub">Three phases of planned evolution beyond the current graduation project.</p>
+  <div class="fut-grid reveal">
+    <div class="fut-col">
+      <div class="fut-phase" style="--acc:var(--green);color:var(--green)">Phase 01 — Near Term</div>
+      <div class="fut-item"><h3 style="--acc:var(--green)">Mobile App</h3><p>React Native app for students to access notebooks, view emotion history, and receive push notifications when notebooks are ready.</p></div>
+      <div class="fut-item"><h3>Live Class Mode</h3><p>Multiple students stream to the same teacher session simultaneously — teacher sees real-time aggregate emotion heatmap during a live lecture.</p></div>
+      <div class="fut-item"><h3>LMS Integration</h3><p>Connect to Moodle and Blackboard to automatically push generated notebooks into the student's course materials folder.</p></div>
+    </div>
+    <div class="fut-col">
+      <div class="fut-phase" style="--acc:var(--blue);color:var(--blue)">Phase 02 — Research</div>
+      <div class="fut-item"><h3 style="--acc:var(--blue)">Arabic Lecture Support</h3><p>Fine-tune Whisper on Arabic academic speech. Extend the RAG pipeline to support Arabic textbooks using multilingual SentenceTransformer.</p></div>
+      <div class="fut-item"><h3>Longitudinal Learning Curves</h3><p>Track each student's engagement across an entire semester — predict exam risk from emotion patterns weeks in advance.</p></div>
+      <div class="fut-item"><h3>EduSenseTransformer v2</h3><p>Replace AffectNet-ViT with a domain-adapted model trained on real student faces. Target: >88% on DAISEE with reduced model size.</p></div>
+    </div>
+    <div class="fut-col">
+      <div class="fut-phase" style="--acc:var(--amber);color:var(--amber)">Phase 03 — Scale</div>
+      <div class="fut-item"><h3 style="--acc:var(--amber)">University Deployment</h3><p>Full KKU-wide rollout with institutional authentication, department-level analytics, and faculty reporting dashboards.</p></div>
+      <div class="fut-item"><h3>Multi-Institution Research</h3><p>Collaborate with University of Toronto and Sinai Health to validate EduSense in clinical training and medical education contexts.</p></div>
+      <div class="fut-item"><h3>Privacy-Preserving Mode</h3><p>On-device emotion detection — no webcam frames leave the browser. Local model inference fully protects student biometric privacy.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONCLUSION ════════════════════════════════════════ -->
+<section id="conclusion">
+  <div class="section-tag" style="justify-content:center">Conclusion</div>
+  <h2>EduSense Delivers<br><em>on Every Objective</em></h2>
+
+  <div class="ca-grid reveal">
+    <div class="ca-card"><div class="ca-val">81.1%</div><h3>State-of-the-Art Accuracy</h3><p>Surpasses all published DAISEE baselines including the 2024 general model by +12.5 percentage points.</p></div>
+    <div class="ca-card"><div class="ca-val" style="font-size:1.5rem;padding-top:.3rem">Novel Arch.</div><h3>Original Architecture</h3><p>Transformer + KAN + CORAL ensemble — a new combination for ordinal emotion classification in education.</p></div>
+    <div class="ca-card"><div class="ca-val" style="font-size:1.5rem;padding-top:.3rem">Full Stack</div><h3>Complete Platform</h3><p>Auth, multi-user roles, Supabase persistence, teacher heatmaps, student dashboards, light/dark theme — production-ready.</p></div>
+    <div class="ca-card"><div class="ca-val">Live</div><h3>Running Today</h3><p>Flask app with YouTube, Whisper, FER, FAISS, Claude API, and Supabase — tested and deployed at localhost:5000.</p></div>
+  </div>
+
+  <div class="quote reveal">
+    "When a student struggles, EduSense acts — so no confusion goes unnoticed and no teacher is left without insight."
+  </div>
+
+  <div class="kku">King Khalid University &nbsp;·&nbsp; Computer Science &nbsp;·&nbsp; Graduation Project 2025 &nbsp;·&nbsp; AI & Machine Learning Specialization</div>
+</section>
+
+<!-- LAUNCH -->
+<div class="launch-wrap">
+  <div class="launch-inner">
+    <div class="launch-lbl">Ready to see it live?</div>
+    <a href="https://127.0.0.1:5000/" target="_blank" class="launch-btn">
+      <span class="ldot"></span>
+      <span>Launch EduSense</span>
+      <span class="lurl">localhost:5000</span>
+      <span>↗</span>
+    </a>
+    <div class="launch-hint">Make sure <code>python app.py</code> is running before clicking</div>
+  </div>
+</div>
+
+<footer>EduSense — Intelligent Classroom Engagement Detection &nbsp;·&nbsp; KKU Graduation Project 2025</footer>
+
+<script>
+// ── THEME ──────────────────────────────────────────────
+let T = localStorage.getItem('es_pres_theme') || 'light';
+function setTheme(t) {
+  T = t;
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('es_pres_theme', t);
+  document.querySelectorAll('.topt').forEach((b,i) =>
+    b.classList.toggle('on', (i===0&&t==='light')||(i===1&&t==='dark'))
+  );
+  // update chart bars that depend on theme border colour
+  document.querySelectorAll('.sota-fill[style*="bg4"]').forEach(f => {
+    f.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg4');
+  });
+}
+setTheme(T);
+
+// ── SCROLL REVEAL ───────────────────────────────────────
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      e.target.querySelectorAll('.obj-card,.prob-card,.ps-card,.wf-card,.ch-card,.tg-card,.fut-item,.mp,.dec-card,.subsys-card,.auth-card,.rf,.db-table,.rls-card,.ds-stat').forEach((el,i) => {
+        el.style.transitionDelay = (i * 0.05) + 's';
+        el.classList.add('on');
+      });
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── ACTIVE NAV ──────────────────────────────────────────
+const secs = document.querySelectorAll('section[id], div[id="hero"]');
+const nls  = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      nls.forEach(l => l.classList.remove('on'));
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('on');
+    }
+  });
+}, { threshold: 0.35 });
+secs.forEach(s => navObs.observe(s));
+
+// ── PILL HOVER ──────────────────────────────────────────
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('mouseenter', () => p.style.boxShadow = '0 0 0 2px var(--border2)');
+  p.addEventListener('mouseleave', () => p.style.boxShadow = '');
+});
+
+// ── KEYBOARD NAV ────────────────────────────────────────
+const slides = ['hero','problem','objectives','architecture','database','roles','dataset','model','results','pipeline','rag','webapp','challenges','techstack','future','conclusion'];
+let cur = 0;
+function goTo(n) {
+  n = Math.max(0, Math.min(slides.length-1, n));
+  cur = n;
+  document.getElementById(slides[n])?.scrollIntoView({behavior:'smooth',block:'start'});
+  updateInd();
+}
+document.addEventListener('keydown', e => {
+  if (['ArrowRight','ArrowDown'].includes(e.code)) { e.preventDefault(); goTo(cur+1); }
+  if (['ArrowLeft','ArrowUp'].includes(e.code))    { e.preventDefault(); goTo(cur-1); }
+});
+
+// ── SLIDE INDICATOR ─────────────────────────────────────
+const si = document.createElement('div');
+si.className = 'si';
+si.innerHTML = `<span class="si-p">‹</span><span class="si-i"><span class="si-c">1</span><span style="color:var(--text3)">/</span>${slides.length}</span><span class="si-n">›</span>`;
+document.body.appendChild(si);
+const siCSS = document.createElement('style');
+siCSS.textContent = `
+.si{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;display:flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--border);border-radius:30px;padding:.45rem .75rem;user-select:none;box-shadow:var(--sh);transition:background .2s,border-color .2s}
+.si-p,.si-n{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text3);cursor:pointer;transition:all .15s;border:1px solid transparent}
+.si-p:hover,.si-n:hover{color:var(--text);border-color:var(--border2);background:var(--bg2)}
+.si-i{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text2);display:flex;align-items:center;gap:.2rem;min-width:34px;justify-content:center}
+.si-c{color:var(--text);font-weight:700}
+#kb-h{position:fixed;bottom:5rem;right:1.5rem;z-index:300;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.55rem 1rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text3);display:flex;align-items:center;gap:.5rem;animation:fio 3.2s ease forwards;box-shadow:var(--sh)}
+.kk{background:var(--bg2);color:var(--text2);padding:.12rem .38rem;border-radius:3px;border-bottom:2px solid var(--border2)}
+@keyframes fio{0%{opacity:0;transform:translateY(6px)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+`;
+document.head.appendChild(siCSS);
+function updateInd() { si.querySelector('.si-c').textContent = cur+1; }
+si.querySelector('.si-p').addEventListener('click', () => goTo(cur-1));
+si.querySelector('.si-n').addEventListener('click', () => goTo(cur+1));
+setTimeout(() => {
+  const h = document.createElement('div'); h.id='kb-h';
+  h.innerHTML=`<span class="kk">←</span><span class="kk">→</span> navigate slides`;
+  document.body.appendChild(h); setTimeout(()=>h.remove(),3400);
+}, 1200);
+
+// ── PARTICLE CANVAS ─────────────────────────────────────
+const canvas = document.getElementById('cv');
+const ctx = canvas.getContext('2d');
+const heroEl = document.getElementById('hero');
+function resizeCv() { canvas.width=heroEl.offsetWidth; canvas.height=heroEl.offsetHeight; }
+resizeCv(); window.addEventListener('resize', resizeCv);
+const pts = Array.from({length:48}, () => ({
+  x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+  r:Math.random()*1.4+0.3,
+  vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+  a:Math.random()*.3+.05,
+}));
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if(d<120){
+      ctx.beginPath();
+      const c = T==='dark' ? '255,255,255' : '0,0,0';
+      ctx.strokeStyle=`rgba(${c},${.06*(1-d/120)})`;
+      ctx.lineWidth=.5; ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+    }
+  }
+  pts.forEach(p=>{
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    const c = T==='dark' ? '255,255,255' : '0,0,0';
+    ctx.fillStyle=`rgba(${c},${p.a})`; ctx.fill();
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width)  p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ── TYPING EFFECT ───────────────────────────────────────
+function type(el,text,delay=0){
+  el.textContent=''; el.style.opacity='1'; let i=0;
+  setTimeout(()=>{const iv=setInterval(()=>{el.textContent+=text[i];i++;if(i>=text.length)clearInterval(iv);},50);},delay);
+}
+window.addEventListener('load', () => {
+  document.querySelectorAll('.tl').forEach(el => type(el, el.dataset.text, parseInt(el.dataset.delay||0)+280));
+});
+
+// ── COUNTERS ────────────────────────────────────────────
+function animCounter(el){
+  const tgt=parseFloat(el.dataset.t), suf=el.dataset.s||'', dec=parseInt(el.dataset.d||0), dur=1700, st=performance.now();
+  function tick(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3);el.textContent=(tgt*e).toFixed(dec)+suf;if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+const cObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.counter').forEach(animCounter);cObs.unobserve(e.target);}});},{threshold:.5});
+const hs=document.querySelector('.hero-stats'); if(hs) cObs.observe(hs);
+
+// ── HIW FLOW ANIMATION ──────────────────────────────────
+document.querySelectorAll('.hiw-flow').forEach(flow=>{
+  const fo=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.hiw-step').forEach((step,i)=>{
+          setTimeout(()=>{
+            step.classList.add('fv');
+            const conn=step.querySelector('.hiw-conn:not(.last)');
+            if(conn) setTimeout(()=>conn.classList.add('ld'),180);
+          },i*170);
+        });
+        fo.unobserve(e.target);
+      }
+    });
+  },{threshold:.07});
+  fo.observe(flow);
+});
+
+// ── SOTA BAR ANIMATION ──────────────────────────────────
+const bObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.sota-fill,.bar-fill').forEach(f=>{const w=f.style.width;f.style.width='0%';setTimeout(()=>f.style.width=w,80);});
+      bObs.unobserve(e.target);
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('#results .reveal, #dataset .reveal').forEach(el=>bObs.observe(el));
+
+// ── HEATMAP ─────────────────────────────────────────────
+const HM_DATA = {
+  ai: {
+    students: ['SA','FD','NM','KH','RA','OB','MA','YA','HO','TA','BA','WA','ZM','IM','QA','EA','JK','LN','PQ','GR'],
+    topics:   ['0m','5m','10m','15m','20m','25m','30m','35m','40m','45m'],
+    topic_labels: ['Intro','Perceptron','Backprop','CNNs','Attention','LLMs','Fine-tune','RL Basics','Projects','Review'],
+    // row hotspots at columns 4,5 (Attention, LLMs)
+    hotspot: [4,5],
+  },
+  ds: {
+    students: ['SA','FD','NM','KH','RA','OB','MA','YA','HO','TA','BA','WA','ZM','IM','QA','EA','JK','LN','PQ','GR'],
+    topics:   ['0m','5m','10m','15m','20m','25m','30m','35m','40m','45m'],
+    topic_labels: ['Intro','Sockets','RPC','Lamport','VClocks','R-Agrawala','Consensus','Paxos','CAP','Review'],
+    hotspot: [4,5,6],
+  },
+  algo: {
+    students: ['SA','FD','NM','KH','RA','OB','MA','YA','HO','TA','BA','WA','ZM','IM','QA','EA','JK','LN','PQ','GR'],
+    topics:   ['0m','5m','10m','15m','20m','25m','30m','35m','40m','45m'],
+    topic_labels: ['Intro','Sorting','Graphs','DP','MaxFlow','NP-Hard','Greedy','Approx','Strings','Review'],
+    hotspot: [4,5],
+  },
+};
+
+// Seeded random for stable data
+function seededRand(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 0xffffffff;
+  };
+}
+
+function buildHmData(key) {
+  const d = HM_DATA[key];
+  const rand = seededRand(key.charCodeAt(0) * 42 + 7);
+  return d.students.map((name, i) =>
+    Array.from({length: d.topics.length}, (_, j) => {
+      let v = rand() * 0.4 + 0.05;
+      // Boost hotspot columns
+      if (d.hotspot.includes(j)) v = Math.min(1, v + 0.35 + rand() * 0.25);
+      // Some students are higher risk
+      if (i === 1 || i === 4) v = Math.min(1, v + 0.2);
+      // First column always low (intro easy)
+      if (j === 0) v = Math.max(0, v - 0.25);
+      return Math.min(1, Math.max(0, v));
+    })
+  );
+}
+
+function cellColor(v) {
+  if (v < 0.2)  return `rgba(22,163,74,${0.1+v*0.6})`;
+  if (v < 0.45) return `rgba(217,119,6,${0.25+v*0.55})`;
+  if (v < 0.7)  return `rgba(220,38,38,${0.35+v*0.45})`;
+  return `rgba(220,38,38,${0.65+v*0.3})`;
+}
+
+function renderHeatmap(key) {
+  const d = HM_DATA[key];
+  const data = buildHmData(key);
+  const wrap = document.getElementById('hm-wrap');
+  if (!wrap) return;
+
+  // Column labels
+  let html = `<div class="hm-col-labels">${d.topic_labels.map(l => `<span>${l}</span>`).join('')}</div>`;
+
+  // Rows
+  data.forEach((row, i) => {
+    html += `<div class="hm-row"><span class="hm-row-lbl">${d.students[i]}</span>`;
+    row.forEach((v, j) => {
+      const pct = Math.round(v * 100);
+      const label = `${d.students[i]} · ${d.topic_labels[j]} · ${pct}% struggle`;
+      html += `<div class="hm-cell" style="background:${cellColor(v)}"
+        onmouseenter="showHmTip('${label}', ${pct})"
+        onmouseleave="hideHmTip()"></div>`;
+    });
+    html += '</div>';
+  });
+
+  wrap.innerHTML = html;
+
+  // Compute stats
+  const allVals = data.flat();
+  const critical = data.filter(row => {
+    const avg = row.reduce((a,b)=>a+b,0)/row.length;
+    return avg > 0.55;
+  }).length;
+
+  // Hottest segment
+  const segAvgs = d.topics.map((_, j) => ({
+    label: d.topic_labels[j],
+    avg: data.reduce((s, row) => s + row[j], 0) / data.length,
+  }));
+  const hottest = segAvgs.reduce((a,b) => a.avg>b.avg?a:b);
+
+  const avgEng = Math.round((1 - allVals.reduce((a,b)=>a+b,0)/allVals.length) * 100);
+  const totalEvents = data.reduce((s, row) => s + row.filter(v=>v>0.5).length, 0);
+
+  document.getElementById('hm-crit').textContent = critical;
+  document.getElementById('hm-hot').textContent  = hottest.label;
+  document.getElementById('hm-eng').textContent  = avgEng + '%';
+  document.getElementById('hm-tot').textContent  = totalEvents;
+}
+
+function showHmTip(label, pct) {
+  const tip = document.getElementById('hm-tip');
+  if (!tip) return;
+  const col = pct >= 70 ? 'var(--red)' : pct >= 45 ? 'var(--amber)' : 'var(--green)';
+  tip.style.display = 'block';
+  tip.innerHTML = `<strong>${label}</strong> — <span style="color:${col};font-weight:600">${pct >= 70 ? 'High struggle' : pct >= 45 ? 'Moderate struggle' : 'Low struggle'}</span>`;
+}
+function hideHmTip() {
+  const tip = document.getElementById('hm-tip');
+  if (tip) tip.style.display = 'none';
+}
+
+function switchHmTab(btn, key) {
+  document.querySelectorAll('.hm-tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  renderHeatmap(key);
+}
+
+// Render on load + re-render when section scrolls into view
+const hmObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { renderHeatmap('ai'); hmObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+const hmWrap = document.getElementById('hm-wrap');
+if (hmWrap) hmObs.observe(hmWrap);
+
+</script>
+</body>
+</html>

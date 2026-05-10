@@ -1020,7 +1020,7 @@ async function loadStudentNotebooks() {
       const subj=nb.sessions?.subjects?.name||'Unknown Subject';
       const det=(nb.detected||[]).join(', ')||'struggle';
       const date=new Date(nb.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-      return `<div class="ri"><div class="ric">📓</div><div class="rii"><div class="rit">${subj} — ${det} at ${nb.video_time_fmt||'?'}</div><div class="rim">Generated ${date}</div></div><div style="display:flex;gap:8px;align-items:center"><span class="bdg ${sm[nb.status]||'bn'}">${nb.status}</span><button class="btn btn-sm" onclick="window.open('/api/download/${nb.filename}','_blank')">↓</button></div></div>`;
+      return `<div class="ri"><div class="ric">📓</div><div class="rii"><div class="rit">${subj} — ${det} at ${nb.video_time_fmt||'?'}</div><div class="rim">Generated ${date}</div></div><div style="display:flex;gap:8px;align-items:center"><span class="bdg ${sm[nb.status]||'bn'}">${nb.status}</span><button class="btn btn-sm" onclick="downloadNotebook(this.dataset.f)" data-f="${nb.filename}">↓</button></div></div>`;
     }).join('');
   } catch(e){list.innerHTML='<div class="empty-state">Could not load notebooks.</div>';}
 }
@@ -1601,6 +1601,31 @@ window.addEventListener('load', () => {
     else { go('p-student'); loadStudentDashboard(); }
   }
 });
+
+function downloadNotebook(filename) {
+  // Use fetch + blob to avoid any URL encoding issues with special chars
+  const url = '/api/download/' + encodeURIComponent(filename);
+  fetch(url, {
+    headers: authToken ? {'Authorization': 'Bearer ' + authToken} : {}
+  })
+  .then(r => {
+    if (!r.ok) {
+      r.json().then(d => toast('❌ ' + (d.error || 'Download failed'))).catch(()=>toast('❌ Download failed'));
+      return null;
+    }
+    return r.blob();
+  })
+  .then(blob => {
+    if (!blob) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 1000);
+  })
+  .catch(e => toast('❌ ' + e.message));
+}
 </script>
 </body>
 </html>
