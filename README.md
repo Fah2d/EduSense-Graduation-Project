@@ -18,13 +18,85 @@
 
 <br/>
 
-**🎓 Graduation Project · King Khalid University · Computer Science · 2025**
+**🎓 Graduation Project · King Khalid University · Computer Science · 2026**
 
 <br/>
 
 </div>
 
+
 ---
+
+## 📊 Project Stats
+
+<div align="center">
+
+![GitHub stars](https://img.shields.io/github/stars/Rootsu5f/EduSense-Graduation-Project?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Rootsu5f/EduSense-Graduation-Project?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/Rootsu5f/EduSense-Graduation-Project?style=social)
+
+<br/>
+
+![GitHub last commit](https://img.shields.io/github/last-commit/Rootsu5f/EduSense-Graduation-Project?style=flat-square&color=0ea5e9)
+![GitHub repo size](https://img.shields.io/github/repo-size/Rootsu5f/EduSense-Graduation-Project?style=flat-square&color=22c55e)
+![GitHub language count](https://img.shields.io/github/languages/count/Rootsu5f/EduSense-Graduation-Project?style=flat-square&color=f59e0b)
+![GitHub top language](https://img.shields.io/github/languages/top/Rootsu5f/EduSense-Graduation-Project?style=flat-square&color=3776AB)
+
+</div>
+
+---
+
+## 🏆 Achievements
+
+<div align="center">
+
+| 🎯 | Achievement |
+|---|---|
+| 🥇 | **81.1% accuracy** on DAISEE — surpasses all published baselines by +12.5pp |
+| 🧠 | **Novel architecture** — Transformer + KAN + CORAL for ordinal emotion classification |
+| 🗄️ | **Production system** — Auth, multi-user, Supabase, heatmaps, RAG, notebooks |
+| 🎓 | **Defended successfully** — King Khalid University, May 2026 |
+| 🔬 | **5-participant integration test** — Wireshark-validated, post-session questionnaire |
+
+</div>
+
+---
+
+## ⚡ Quick Stats
+
+<div align="center">
+
+```
+╔══════════════════════════════════════════════════════╗
+║               EduSense — By The Numbers              ║
+╠══════════════════════════════════════════════════════╣
+║  🎯  Model Accuracy          81.1%  (DAISEE)         ║
+║  📊  Emotions Detected       4      (per frame)      ║
+║  ⏱️  Analysis Interval       2s     (real-time)      ║
+║  🧠  Ensemble Models         7      (+2 specialist)  ║
+║  🗄️  Supabase Tables         6      (full RLS)       ║
+║  🔗  API Routes              25+    (Flask)           ║
+║  📓  Notebook Sections       6      (per notebook)   ║
+║  🎓  Test Participants       5      (KKU students)   ║
+║  📄  Training Clips          6,231  (DAISEE)         ║
+║  📄  Validation Clips        1,688  (zero leakage)   ║
+╚══════════════════════════════════════════════════════╝
+```
+
+</div>
+
+---
+
+## 🌊 Activity Graph
+
+<div align="center">
+
+[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=Rootsu5f&repo=EduSense-Graduation-Project&theme=react-dark&bg_color=0f172a&color=0ea5e9&line=0ea5e9&point=ffffff&area=true&hide_border=true)](https://github.com/Rootsu5f/EduSense-Graduation-Project)
+
+</div>
+
+---
+
 
 ## 📌 Table of Contents
 
@@ -71,7 +143,7 @@ Student Webcam  →  CLAHE  →  FER  →  D'Mello Formulas  →  Trigger?
 
 ```bash
 # Clone and run
-git clone https://github.com/your-username/EduSense-Graduation-Project.git
+git clone https://github.com/Rootsu5f/EduSense-Graduation-Project.git
 cd EduSense-Graduation-Project
 
 pip install -r requirements.txt
@@ -85,10 +157,10 @@ python app.py
 
 | Role | Email | Password |
 |---|---|---|
-| Teacher | Aymen@kku.edu.sa | demo2025@ |
-| Student | s444810913@kku.edu.sa | demo2025@ |
-| Student | s444802593@kku.edu.sa | demo2025@ |
-| Student | s444803647@kku.edu.sa | demo2025@ |
+| Teacher | Aymen@kku.edu.sa | demo2026@ |
+| Student | s444810913@kku.edu.sa | demo2026@ |
+| Student | s444802593@kku.edu.sa | demo2026@ |
+| Student | s444803647@kku.edu.sa | demo2026@ |
 
 ---
 
@@ -386,13 +458,16 @@ ALTER TABLE notebooks ADD COLUMN IF NOT EXISTS content text;
 
 <div align="center">
 
-### 📸 EduSense Team — KKU Graduation 2025
+### 📸 EduSense Team — KKU Graduation 2026
 
-<img src="https://raw.githubusercontent.com/rootSU5F/EduSense-Graduation-Project/main/Docs/team.jpg" width="80%" style="border-radius:12px;" alt="EduSense Team Photo"/>
+<div style="display:inline-block; padding:10px; background:#0ea5e9; border-radius:16px;">
+<img src="https://raw.githubusercontent.com/Rootsu5f/EduSense-Graduation-Project/main/Docs/team.jpg" width="100%" style="border-radius:10px; display:block;" alt="EduSense Team Photo"/>
+</div>
 
 <br/><br/>
 
-*From left to right: Basel, Saeed, Fahad, Dr. Anand, Khalid, Ahmad*
+<sub>📍 King Khalid University · College of Computer Science · Abha, Saudi Arabia</sub><br/>
+<sub><i>From left to right: Basel · Saeed · Fahad · Dr. Anand Deva Durai C · Khalid · Ahmad</i></sub>
 
 <br/>
 
@@ -457,7 +532,7 @@ ALTER TABLE notebooks ADD COLUMN IF NOT EXISTS content text;
 
 <br/>
 
-**Dr. Anand**<br/>
+**Dr. Anand Deva Durai C**<br/>
 <sub>Department of Computer Science · King Khalid University</sub><br/>
 <sub>Abha, Saudi Arabia</sub>
 
@@ -471,7 +546,7 @@ ALTER TABLE notebooks ADD COLUMN IF NOT EXISTS content text;
 
 **King Khalid University (KKU)**
 College of Computer Science — Department of Computer Science
-Graduation Project · Academic Year 2025
+Graduation Project · Academic Year 2026
 Abha, Saudi Arabia 🇸🇦
 
 </div>
@@ -481,7 +556,7 @@ Abha, Saudi Arabia 🇸🇦
 ## 📜 License
 
 ```
-EduSense © 2025 — King Khalid University
+EduSense © 2026 — King Khalid University
 Academic and non-commercial use only.
 All rights reserved by the EduSense team.
 Redistribution or commercial use without explicit written permission is prohibited.
@@ -490,6 +565,26 @@ Redistribution or commercial use without explicit written permission is prohibit
 ---
 
 <div align="center">
+
+## 🤝 Contributing
+
+<div align="center">
+
+[![Contributors](https://contrib.rocks/image?repo=Rootsu5f/EduSense-Graduation-Project)](https://github.com/Rootsu5f/EduSense-Graduation-Project/graphs/contributors)
+
+</div>
+
+---
+
+## 📈 Languages Used
+
+<div align="center">
+
+[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Rootsu5f&repo=EduSense-Graduation-Project&layout=compact&theme=react&bg_color=0f172a&title_color=0ea5e9&text_color=ffffff&border_color=1e3a5f)](https://github.com/Rootsu5f/EduSense-Graduation-Project)
+
+</div>
+
+---
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,50:1e3a5f,100:0f172a&height=100&section=footer" width="100%"/>
 
